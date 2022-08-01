@@ -5,7 +5,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class AutowireTest {
 	public static void main(String[] args) {
-		String config = "com/varxyz/jvx330/di/example5/ex01/beans.xml";
+		String config = "com/varxyz/jvx330/di/example5/beans.xml";
 		GenericApplicationContext context = new GenericXmlApplicationContext(config);
 		
 		MemberController controller = context.getBean("memberController" , MemberController.class);

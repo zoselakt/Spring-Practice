@@ -17,7 +17,6 @@ public class CustomerDao {
 	public CustomerDao(DataSource datasource) {
 		jdbcTemplate = new JdbcTemplate(datasource);
 	}
-	
 	public List<Customer> findAllCustomers(){
 		String sql = "SELECT cid, email, passwd, name, ssn, phone, regdate FROM Customer";
 		
@@ -33,7 +32,6 @@ public class CustomerDao {
 			}
 		});
 	}
-	
 	public List<Customer> findCustomerByRegDate(Date regDate){
 		String sql = "SELECT cid, email, passwd, name, ssn, phone, regdate FROM Customer WHERE DATE(regDate) = ?";
 		return jdbcTemplate.query(sql, new RowMapper<Customer>() {
@@ -48,7 +46,6 @@ public class CustomerDao {
 			}
 		}, regDate);
 	}
-	
 	public Customer findCustomerByEmail(String email) {
 		String sql = "SELECT cid, email, passwd, name, ssn, phone, regdate FROM Customer WHERE email = ?";
 		return jdbcTemplate.queryForObject(sql, new RowMapper<Customer>() {
@@ -63,7 +60,6 @@ public class CustomerDao {
 			}
 		}, email);
 	}
-	
 	public long countCustomers() {
 		String sql = "SELECT count(*) FROM customer";
 		return jdbcTemplate.queryForObject(sql, Long.class);
