@@ -13,6 +13,7 @@
 		<property name="bar" ref="bar"/> <!-- name: / ref: Bar 클래스 받아오기 -->
 	</bean>
 	
+	
 	<bean name="bar" class="com.varxyz.jvx330.di.example.Bar"/>
 
 </beans>

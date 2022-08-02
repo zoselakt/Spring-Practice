@@ -7,6 +7,6 @@
 
 
 <context:annotation-config/>
-	<bean name="memberController" class="com.varxyz.jvx330.di.example5.ex01.MemberController"/>
-	<bean name="memberService" class="com.varxyz.jvx330.di.example5.ex01.MemberServiceImp"/>
+	<bean name="memberController" class="com.varxyz.jvx330.di.example5.MemberController"/>
+	<bean name="memberService" class="com.varxyz.jvx330.di.example5.MemberServiceImp"/>
 </beans>

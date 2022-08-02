@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+body{
+	background: aqua;
+}
+
+h2{
+	text-align: center;
+}
