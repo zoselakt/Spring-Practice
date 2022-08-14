@@ -1,0 +1,159 @@
+예외처리 : 예외페이지로 이동 
+@ExceptionHandler(Exception.class)
+public String catcher(Exception ex) {
+	return "yoilError";
+}
+----------------------------------------------
+@ModelAttribute("model") -> 소문자로 해야한다.
+@ModelAttibute Model model 
+은 같은 효과
+생략이가능하여 파라미터에 객체를 생성하면 자동설정된다.
+이후 Model객체에 추가
+-------------------------------------------------------------------------------------------
+@RequestMapping을 class에 붙이혀서 사용하면 경로를 짦게 할수 있다.
+@RequestMapping("1차경로")
+class ~~ (){
+@getMapping("2차경로")
+public method(){
+	...
+}
+@postMapping("2차경로")
+public method(){
+	...
+}
+------------------------------------------------------------------------------------------
+한글인코딩 web.xml
+<filter>
+	<filter-name>encodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	<init-param>
+		<param-name>forceEncoding</param-name>
+		<param-value>true</param-value>
+	</init-param>
+</filter>
+
+<filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+-------------------------------------------------------------------------------------------------------------
+redirect
+redirect로 들어오는것은 get방식으로 되돌아온다.
+
+forward
+- A페이지는 일부만 처리하고 처리값을 B페이지에 전달하고 B페이지가 응답한다.
+최종적으로 보여지는화면은 B페이지
+
+스프링                 
+		 register Form
+		         ㅣ
+클라이언트 요청-> DispatcherServlet < -- > controller
+		         l            요청/응답
+		      JstlView
+	                    l
+클라이언트 응답 <- RedurectView     
+
+DispatcherServlet : InternalResourceView를 호출 / servlet-context.xml내부 코드
+<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:property name="prefix" value="/WEB-INF/views/" />
+	<beans:property name="suffix" value=".jsp" />
+</beans:bean>
+
+forward :  "forward:/포워드 뷰";
+redirect :  "redirect:/리다이렉트 뷰";
+
+redirect와 달리 forward는 요청이 하나임!
+------------------------------------------------------------------------------------------------------------------------
+쿠키
+이름과 값의 쌍으로 구성된 정보.
+요청시 domain, path가 일치하는 경우에만 자동전송 (하위경로 포함)
+
+확인방법 :요청헤더에 request전송과 함께 보내지기 때문에  값이 출력된다.
+
+// 2-2. id와 pwd가 일치하면,
+	if(rememberId) {
+	//     1. 쿠키를 생성
+		Cookie cookie = new Cookie("id", id);  왼쪽이 이름, 오른쪽이 값
+		cookie.setMaxAge(60*60*24); 24H
+//	       2. 응답에 저장
+		response.addCookie(cookie);
+	} else {
+//	       1. 쿠키를 삭제
+		Cookie cookie = new Cookie("id", id); 삭제시 값은 없어도된다.
+		cookie.setMaxAge(0); // 쿠키를 삭제
+//	       2. 응답에 저장
+		response.addCookie(cookie);
+	}
+활용
+아이디입력: <input type="text" name="id" value="${cookie.id.value}" placeholder="이메일 입력" autofocus>
+- 쿠키가 없으면 빈 값이 나오고 쿠키가있으면 쿠키객체의 값을 저장하는 코드
+
+아이디기억체크박스: <label><input type="checkbox" name="rememberId" value="on" ${empty cookie.id.value ? "":"checked"}> 아이디 기억</label> |
+- 쿠키가 체크(empty)되어 있지 않으면 쿠키가 삭제 / 체크되어있으면 값저장
+
+추가속성
+cookie.setValue(URLEncoder.encode("남궁성"); -> 고정값 으로 변경
+cookie.Domain("www.fastcampus.co.kr");  -> 고정도메인 으로 변경
+cookie.setPath("/ch2"); -> 고정 경로 로 변경
+읽어오기
+Cookie [] cookies = request.getCookies(); -> 쿠키 읽기 객체생성
+for(Cookie cookie : cookies){
+	String name = cookie.getName();
+	String value = cookie.getValue();
+}
+
+@CookieValue 어노테이션사용으로 쿠키나 세션을 설정가능하다.
+@cookieValue("JSESSIONID") String sessionId
+--------------------------------------------------------------------------------------------------------------------------------
+세션
+- 서로 관련된 요청들을 하나로 묶은것(쿠키를 이용)
+cookie는 브라우저에 저장되고 session은 서버에 저장된다.
+
+세션생성
+HttpSession session = request.getSession();
+session.setAttribute("id", "asdf"); <- 저장
+session.getAttribute(); 읽기
+
+세션종료
+수동종료(예:login-logout) 
+: invalidate() - 즉시종료
+setMaxInactiveinterval(30*60); - 예약종료(30분후)
+
+자동종료(web.xml설정): 
+<session-config>
+	<session-timeout>	30 </session-timeout> - 30분
+</session-config>
+
+세션활용
+<form action="/ch2/login/login" method="post" onsubmit="return formCheck(this);">
+- action내 login페이지에서 URL값도 없고, 구글설정에서쿠키를 차단하면 쿠키는 전송하려고 
+  계속 세션객체를 만들어지지만 어느것도 참고할게 없으므로 서버의 부담이 커지게 된다.
+
+- 쿠키를 허용하지 않는 브라우저는 모든URL에 JSessionId를 붙혀줘야한다. 
+  하지만 매번 JSessionId를 붙이기에는 무리가 있다. 그 대신 <c:url value=> 태그를 사용하여 URL을 지정해주어야 한다.
+  서버에 요청시 모든 세션ID가 URL과 함께 보내지도록 한다.
+
+세션보내는방법
+1. jsessionid :  action="/ch2/login/login":${jsessionId} 넣어주기 (이 방법대신 c태그 이용 )
+2. c태그 이용 보내기 :<form action="<c:url value='/ch2/login/login'/>" method="post" onsubmit="return formCheck(this);">
+public class BoardController {
+	@GetMapping("/list")
+	public String list(HttpServletRequest request) {
+		if(!loginCheck(request))
+			return "redirect:/login/login?toURL="+request.getRequestURL(); -> 로그인 안했으면 로그인화면으로 이동
+		return "boardList"; -> 로그인 한 상태이면 게시판 화면으로 이동
+	}
+
+	private boolean loginCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession(); -> 세션 얻기
+		return session.getAttribute("id")!=null; -> 세션 id가 있으면 true반환 없으면 false
+	}
+}
+
+로그인 이전까지는 세션이 필요가 없으니 session="false"하여야한다.
+이후 세션false명령어가있는 페이지로 가더라도 session이 사라지거나 다시 받지 않고 계속이어진다.
+jsp페이지에 추가 : <%@ page session="false" %>

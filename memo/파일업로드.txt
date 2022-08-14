@@ -1,0 +1,69 @@
+pom.xml
+<dependency>
+  <groupId>commons-fileupload</groupId>
+  <artifactId>commons-fileupload</artifactId>
+  <version>1.3.2</version>
+</dependency>
+
+web.xml
+<filter>
+	<filter-name>multipartFilter</filter-name>
+	<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>multipartFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+servlet-context (생략가능??? - 되긴함)
+<!-- <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean> -->
+
+controller
+private static final String SAVE_DIR = "C:\\img";
+	//파일추가
+	@PostMapping("gallery/FileUploadForm")
+	public String FileUpload(@ModelAttribute("menu") GalleryVo galleryUploadVo, 
+			Model model, @RequestParam("imgFile") MultipartFile file) {
+		
+		String fileRealName = file.getOriginalFilename();
+		long size = file.getSize();
+		
+		System.out.println("파일명 : "  + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		
+		UUID uuid = UUID.randomUUID();
+		String[] uuids = uuid.toString().split("-");
+		
+		String uniqueName = uuids[0];
+		System.out.println(uuid.toString());
+		System.out.println("생성된 고유문자열: " + uniqueName);
+		System.out.println("확장자명: " + fileExtension);
+		
+		File saveFile = new File(SAVE_DIR+"\\"+uniqueName+fileExtension);
+		
+		try {
+			file.transferTo(saveFile);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		galleryUploadVo.setImg(uniqueName + fileExtension);
+		
+		String imgName = galleryUploadVo.getImg();
+		System.out.println(imgName);
+		model.addAttribute("imgName", imgName);
+		
+		galleryServiceImpl.insertFileUpload(galleryUploadVo);
+		System.out.println();
+		return "gallery/mainForm";
+	}
+
+.jsp
+<label>갤러리 이미지 : </label>
+<form method="post" enctype="multipart/form-data">
+	<input type="file" name="imgFile"/>
+	<input type="submit" value="파일업로드">
+</form>
