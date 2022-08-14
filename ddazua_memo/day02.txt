@@ -1,0 +1,11 @@
+lombok 라이브러리
+	- getter/setter, toString, 생성자 등을 어노테이션을 통해 자동으로 생성해준다.
+------------------------------------------------------------------------------------------------------------------------
+1. src/main/java : 서버단 java파일
+2. src/test/java : 테스트위한 java파일
+3. src/main/resource : src/main/java : 관련 설정파일
+4. src/test/resource :src/test/java : 관련 설정파일
+5. src/mai/webapp/WEB-INF/views : jsp, html파일경로
+6. pom.xml : 라이브러리 의존성 관리
+7. src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml : 웹과 관련된 스프링 설정파일
+8. src/main/webapp/WEB-INF/spring/root-context.xml : 스프링객체관련 설정파일

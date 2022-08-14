@@ -1,0 +1,16 @@
+Qualifier
+	@Autowired를 통해객체를 주입할 때 같은 타입의 객체가 여러 개 있다면, 구분할 수 없기때문에
+	@Qualifier를 통해 식별자를 부여하면 원하는 객체를 주입받을 수 있다.
+	@Primary를 사용하게 되면 default값으로 설정할 수 있으며, 이 때에는 식별자 없이 주입시
+	@Primary가 사용된 객체가 주입된다.
+
+	 @Qualifier("식별자A") @Primary
+	 public class클래스A implements 인터페이스{}
+
+	 @Qualifier("식별자B")
+	 public class클래스B implements 인터페이스{}
+
+
+	 @Autowired
+	// @Qualifier("식별자B") -- B을 받으려면 직접써야한다.
+	 private 인터페이스 객체명;
