@@ -15,6 +15,10 @@ web.xml
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
 -------------------------------------------------------------------------------------------------------------
+tomcat - server.xml
+<Context allowCasualMultipartParsing="true" path="/">
+    <Resources cachingAllowed="true" cacheMaxSize="100000" />
+    ----------------------------------------------------------------------------------------------------------------
 
 controller
 private static final String SAVE_DIR = "C:\\img";
