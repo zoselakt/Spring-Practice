@@ -82,5 +82,18 @@ public class NoticeDao {
 			
 		return new PageImpl<NoticeCommand>(
 				jdbcTemplate.query(sql, new NoticeRowMapper()), pageable, getCount());	
-		}
+	}
+	
+	public List<NoticeCommand> searchByTitle(String title){
+		String sql = "SELECT * FROM notice WHERE title = ? LIKE '%" + title +" %'";
+		return jdbcTemplate.query(sql, new NoticeRowMapper(), title);
+	}
+	public List<NoticeCommand> searchByContent(String content){
+		String sql = "SELECT * FROM notice WHERE content = ? LIKE '%" + content +" %'";
+		return jdbcTemplate.query(sql, new NoticeRowMapper(), content);
+	}
+	public List<NoticeCommand> searchByWriter(String writer){
+		String sql = "SELECT * FROM notice WHERE writer = ? LIKE '%" + writer +" %'";
+		return jdbcTemplate.query(sql, new NoticeRowMapper(), writer);
+	}
 }

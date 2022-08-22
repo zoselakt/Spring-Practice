@@ -27,8 +27,13 @@
           <fieldset>
             <div class="field_inner">
               <label>검색어</label>
-              <input type="text">
-              <a href="#"><button class="board_btn" type="button">검색</button></a>
+              <select class= "searching" name="search-input">
+              	<option value="title">제목으로 검색</option>
+              	<option value="content">내용으로 검색</option>
+              	<option value="writer">작성자로 검색</option>
+              </select>
+              <input type="text" class="search-input" name="search-input">
+              <a href="searchNoticeForm"><button class="board_btn" type="button">검색</button></a>
               <a href="insertNoticeForm"><button class="board_btn service"  type="button">공지작성</button></a>
             </div>
           </fieldset>

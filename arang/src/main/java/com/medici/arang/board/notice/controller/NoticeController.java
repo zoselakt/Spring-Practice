@@ -1,5 +1,6 @@
 package com.medici.arang.board.notice.controller;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
@@ -20,6 +22,12 @@ import com.medici.arang.board.notice.service.NoticeServiceImpl;
 @Controller("noticeController")
 public class NoticeController {
 	private NoticeServiceImpl noticeServiceImpl;
+	
+	@ExceptionHandler({NullPointerException.class, FileNotFoundException.class})
+	public String ExceptionHandler(Exception ex, Model m) {
+		m.addAttribute("ex", ex);
+		return "error";
+	}
 	
 	@Autowired
 	public NoticeController(NoticeServiceImpl noticeServiceImpl) {
@@ -55,7 +63,26 @@ public class NoticeController {
 		model.addAttribute("startBlockPage", startBlockPage);
 		model.addAttribute("endBlockPage", endBlockPage);
 		model.addAttribute("noticeList", noticeList);
+		
+
+		
 		return "notice/notice";
+	}
+	@GetMapping("notice/searchNoticeForm")
+	public String searchNoticeForm(NoticeCommand command, Model model) {
+		String title = command.getTitle();
+		List<NoticeCommand> searchTiele = noticeServiceImpl.searchByTitle(title);
+		
+		String content = command.getContent();
+		List<NoticeCommand> searchContent = noticeServiceImpl.searchByContent(content);
+		
+		String writer = command.getWriter();
+		List<NoticeCommand> searchWriter = noticeServiceImpl.searchByWriter(writer);
+		
+		model.addAttribute("searchTiele", searchTiele);
+		model.addAttribute("searchContent", searchContent);
+		model.addAttribute("searchWriter", searchWriter);
+		return "notice/searchNoticeForm";
 	}
 	
 	@GetMapping("notice/findOneNoticeForm")

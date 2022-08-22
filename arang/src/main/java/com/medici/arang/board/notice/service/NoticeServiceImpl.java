@@ -63,4 +63,19 @@ public class NoticeServiceImpl implements NoticeService{
 		return paging(num);
 	}
 
+	@Override
+	public List<NoticeCommand> searchByTitle(String title) {
+		return dao.searchByTitle(title);
+	}
+
+	@Override
+	public List<NoticeCommand> searchByContent(String content) {
+		return dao.searchByContent(content);
+	}
+
+	@Override
+	public List<NoticeCommand> searchByWriter(String writer) {
+		return dao.searchByWriter(writer);
+	}
+
 }

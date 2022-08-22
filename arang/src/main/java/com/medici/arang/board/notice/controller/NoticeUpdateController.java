@@ -1,5 +1,7 @@
 package com.medici.arang.board.notice.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,31 +25,23 @@ public class NoticeUpdateController {
 	}
 	
 	@GetMapping("notice/updateNoticeForm")
-	public String updateGet(@ModelAttribute NoticeCommand command, Model model,
+	public String updateGet(@ModelAttribute NoticeCommand noticeCommand, Model model,
 			HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		//String getEmail = (String) session.getAttribute("email");
-		
-		String title = (String) session.getAttribute("title");
-		String adminIdentified = (String) session.getAttribute("writer");
-		String content = (String) session.getAttribute("content");
-		
-		command.setTitle(title);
-		command.setWriter(adminIdentified);
-		command.setContent(content);
-		
-		model.addAttribute("command", command);
+//		HttpSession session = request.getSession();
+//		String getEmail = (String) session.getAttribute("email");
+//		String adminIdentified = (String) session.getAttribute("writer");
+//		command.setWriter(adminIdentified);
+		model.addAttribute("noticeCommand", noticeCommand);
 		return "notice/updateNoticeForm";
 	}
 	@PostMapping("notice/updateNoticeForm")
-	public String updatePost(@ModelAttribute NoticeCommand command, Model model,
+	public String updatePost(@ModelAttribute NoticeCommand noticeCommand, Model model,
 			HttpServletRequest request) {
-		long getLong = command.getNum(); 
-		long noticeUpdate = noticeServiceImpl.updateNotice(command, getLong);
-		
+		long getLong = noticeCommand.getNum(); 
+		long noticeUpdate = noticeServiceImpl.updateNotice(noticeCommand, getLong);
+
 		request.setAttribute("noticeUpdate", noticeUpdate);
-		model.addAttribute("command", command);
+		model.addAttribute("noticeCommand", noticeCommand);
 		return "redirect:notice";
 	}
 }

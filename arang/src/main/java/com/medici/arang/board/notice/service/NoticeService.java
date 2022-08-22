@@ -20,4 +20,7 @@ public interface NoticeService {
 	public List<NoticeCommand> paging(long num);
 	public Page<NoticeCommand> findAll(Pageable pageable);
 	public long getCount();
+	public List<NoticeCommand> searchByTitle(String title);
+	public List<NoticeCommand> searchByContent(String content);
+	public List<NoticeCommand> searchByWriter(String writer);
 }
