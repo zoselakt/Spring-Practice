@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function gomain() {location.href="mainForm"	}
+	function gomain() {location.href="notice"	}
 </script>
 </head>
 <body>

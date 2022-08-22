@@ -129,7 +129,7 @@ public class DataSourceConfig {
 	}
 	@Bean
 	public NoticeServiceImpl noticeServiceImpl() {
-		return new NoticeServiceImpl();
+		return new NoticeServiceImpl(noticeDao());
 	}
 
 }

@@ -2,27 +2,35 @@ package com.medici.arang.board.notice.service;
 
 import java.util.List;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.dao.NoticeDao;
+import com.medici.arang.board.notice.domain.NoticeVo;
 
 public class NoticeServiceImpl implements NoticeService{
 	NoticeDao dao = new NoticeDao();
 	
+	@Autowired
+	public NoticeServiceImpl(NoticeDao dao) {
+		this.dao = dao;
+	}
+	
 	@Override
-	public void insertNotice(NoticeCommand command) {
-		dao.insertNotice(command);
+	public long insertNotice(NoticeCommand command) {
+		return dao.insertNotice(command);
 	}
 
 	@Override
-	public void updateNotice(NoticeCommand command, long num) {
-		dao.updateNotice(command, num);
+	public long updateNotice(NoticeCommand command, long num) {
+		return dao.updateNotice(command, num);
 	}
 
 	@Override
-	public void deleteNotice(long num) {
-		dao.deleteNotice(num);
+	public long deleteNotice(long num) {
+		return dao.deleteNotice(num);
 	}
 
 	@Override
@@ -38,6 +46,21 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public long NoticeCount(long num) {
 		return dao.NoticeCount(num);
+	}
+
+	@Override
+	public long getCount() {
+		return dao.getCount();
+	}
+
+	@Override
+	public Page<NoticeCommand> findAll(Pageable pageable) {
+		return dao.findAll(pageable);
+	}
+
+	@Override
+	public List<NoticeCommand> paging(long num) {
+		return paging(num);
 	}
 
 }

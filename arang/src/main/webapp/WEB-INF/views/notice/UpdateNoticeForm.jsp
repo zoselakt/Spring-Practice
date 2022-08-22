@@ -8,20 +8,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function gomain() { location.href="mainForm"}
+	function gomain() { location.href="notice"}
 </script>
 </head>
 <body>
 <h1>공지수정</h1>
-<form:form method="post" modelAttribute="noticeVo">
+<form:form method="post" modelAttribute="noticeCommand">
 	<table>
 		<tr>
 			<td>제목</td>
-			<td><form:input path="title" name="title" type="text" size="70" maxlength="100" value=""/></td>
+			<td><form:input path="title" class="title" type="text" size="70" maxlength="100"
+			/></td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><form:textarea path="content" name="content" cols="72" rows="20"></form:textarea></td>
+			<td><form:textarea path="content" class="content" cols="72" rows="20"></form:textarea></td>
 		</tr>
 		<tr>
 			<td><input type="submit" value="수정하기"></td>

@@ -1,0 +1,5 @@
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true">
+      <Context docBase="C:\NCS\java_kgd\project_gallery\arang-main\src\main\webapp\resources\img\" path="/upload_img" reloadable="true"/>
+      <Context docBase="C:\NCS\java_kgd\project_gallery\arang-main\src\main\webapp\resources" path="/fake_resources" reloadable="true"/>
+
+      <Context docBase="arang" path="/arang" reloadable="true" source="org.eclipse.jst.jee.server:arang"/></Host>
