@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+.btn2_group {
+  float: right;
+}
+
+.btn2 {
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.container {
+  padding-top: 130px;
+}
+
+.sub_title {
+  margin-bottom: 30px;
+}
+
+.container .info_simul {
+  height: 450px;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+.container .info_wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.container .info_wrapper.first {
+  padding-top: 73px;
+}
+
+.container .info_wrapper.second {
+  padding-top: 68px;
+}
+
+.container .info_wrapper.second .artist_avatar img {
+  margin-top: 12px;
+}
+
+.info_left .table_a{
+    width: 500px!important;
+}
+
+.info_center .table_a {
+  width: 300px!important;
+}
+
+.info_left {
+  text-align: center;
+}
+
+.artist_avatar img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 7px gray;
+  margin-top: 22px;
+}
+
+.my_info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+.my_info .e_name {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.table_a td.a_category {
+  font-size: 15px;
+}
+
+.table_a td.a_data {
+  padding-bottom: 30px!important;
+}
+
+.table_a input {
+  width: 160px;
+  height: 7px;
+  border: 1px solid lightgray;
+}
+
+.table_a input.big {
+  width: 330px;
+}
+
+.table_a input.profile_up {
+  border: none;
+  background: none;
+  height: 10px;
+  width: 200px;
+}
