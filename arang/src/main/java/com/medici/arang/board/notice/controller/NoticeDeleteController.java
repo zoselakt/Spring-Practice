@@ -26,6 +26,7 @@ public class NoticeDeleteController {
 		model.addAttribute("command",command);
 		return "notice/deleteNoticeForm";
 	}
+	
 	@PostMapping("notice/deleteNoticeForm")
 	public String deletePost(@ModelAttribute NoticeCommand command, Model model,
 			HttpServletRequest request) {

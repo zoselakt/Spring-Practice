@@ -9,6 +9,11 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function gomain() { location.href="notice"}
+      function location_replace(){          
+		  var link_url = "notice";      
+		  location.replace(link_url);
+		  document.getElementById("location_replace").innerHTML = link_url;	 
+	  }
 </script>
 </head>
 <body>
@@ -21,15 +26,15 @@
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td><form:input path="writer" class="writer" type="text" placeholder="임의의 작성자값"/></td>
+			<td><input value="${noticeCommand.writer}"></td>
 		</tr>
 		<tr>
 			<td>내용</td>
 			<td><form:textarea path="content" class="content" cols="72" rows="20"></form:textarea></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="등록하기"></td>
-			<td><input type="reset" value="작성취소"></td> 
+			<td><button type="submit" id="location_replace">등록</button></td> 
+			<td><input type="reset" value="초기화"></td> 
 			<td><input type="button" onclick="gomain()" value="목록으로"></td>
 		</tr>
 	</table>

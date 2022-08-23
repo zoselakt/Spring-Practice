@@ -1,9 +1,9 @@
 package com.medici.arang.board.notice.controller;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.service.NoticeServiceImpl;
@@ -23,19 +24,13 @@ import com.medici.arang.board.notice.service.NoticeServiceImpl;
 public class NoticeController {
 	private NoticeServiceImpl noticeServiceImpl;
 	
-	@ExceptionHandler({NullPointerException.class, FileNotFoundException.class})
-	public String ExceptionHandler(Exception ex, Model m) {
-		m.addAttribute("ex", ex);
-		return "error";
-	}
-	
 	@Autowired
 	public NoticeController(NoticeServiceImpl noticeServiceImpl) {
 		this.noticeServiceImpl = noticeServiceImpl;
 	}
 	
 	@GetMapping("notice/notice")
-	public String noticeAllFind(NoticeCommand command, Model model, 
+	public String noticeAllFindGet(NoticeCommand command, Model model, 
 			HttpServletRequest request, HttpSession session) {
 		List<NoticeCommand> noticeFindAll = noticeServiceImpl.findAllNotice();
 		model.addAttribute("noticeFindAll", noticeFindAll);
@@ -64,25 +59,32 @@ public class NoticeController {
 		model.addAttribute("endBlockPage", endBlockPage);
 		model.addAttribute("noticeList", noticeList);
 		
-
-		
 		return "notice/notice";
 	}
-	@GetMapping("notice/searchNoticeForm")
-	public String searchNoticeForm(NoticeCommand command, Model model) {
-		String title = command.getTitle();
-		List<NoticeCommand> searchTiele = noticeServiceImpl.searchByTitle(title);
+	
+	@GetMapping("/getSearchList")
+	@ResponseBody
+	public List<NoticeCommand> getSearchList (NoticeCommand command, Model model,
+			HttpServletResponse response, String type, String keyword) {
+		String commandType = command.getType();
+		String commandKeyword = command.getKeyword(); 
+//		String title = command.getTitle();
+//		List<NoticeCommand> searchTiele = noticeServiceImpl.searchByTitle(title);
+//		
+//		String content = command.getContent();
+//		List<NoticeCommand> searchContent = noticeServiceImpl.searchByContent(content);
+//		
+//		String writer = command.getWriter();
+//		List<NoticeCommand> searchWriter = noticeServiceImpl.searchByWriter(writer);
+//		
+//		model.addAttribute("searchTiele", searchTiele);
+//		model.addAttribute("searchContent", searchContent);
+//		model.addAttribute("searchWriter", searchWriter);
 		
-		String content = command.getContent();
-		List<NoticeCommand> searchContent = noticeServiceImpl.searchByContent(content);
+		List<NoticeCommand> search = noticeServiceImpl.selectSearchList(commandType, commandKeyword);
+		model.addAttribute("search", search);
 		
-		String writer = command.getWriter();
-		List<NoticeCommand> searchWriter = noticeServiceImpl.searchByWriter(writer);
-		
-		model.addAttribute("searchTiele", searchTiele);
-		model.addAttribute("searchContent", searchContent);
-		model.addAttribute("searchWriter", searchWriter);
-		return "notice/searchNoticeForm";
+		return search;
 	}
 	
 	@GetMapping("notice/findOneNoticeForm")
@@ -92,4 +94,12 @@ public class NoticeController {
 		model.addAttribute("noticeFindOne", noticeFindOne);
 		return "notice/findOneNoticeForm";
 	}
+	@PostMapping("notice/findOneNoticeForm")
+	public String noticeOnePost(NoticeCommand command, Model model) {
+		long getNum = command.getNum();
+		NoticeCommand noticeFindOne = noticeServiceImpl.findOneNotice(getNum);
+		model.addAttribute("noticeFindOne", noticeFindOne);
+		return "notice/findOneNoticeForm";
+	}	
+	
 }

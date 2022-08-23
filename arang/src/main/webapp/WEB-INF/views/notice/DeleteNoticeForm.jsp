@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form:form method="post" modelAttribute="noticeVo">
-	 	<input type="submit" value="글 삭제" placeholder="글삭제번호입력"/><br>
+	<td><button type="submit" id="location_replace">삭제</button></td>
 	</form:form>
 </body>
 </html>

@@ -23,4 +23,7 @@ public interface NoticeService {
 	public List<NoticeCommand> searchByTitle(String title);
 	public List<NoticeCommand> searchByContent(String content);
 	public List<NoticeCommand> searchByWriter(String writer);
+	
+	
+	public List<NoticeCommand> selectSearchList(String type, String keyword);
 }

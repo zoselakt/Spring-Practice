@@ -2,6 +2,7 @@ package com.medici.arang.board.notice.dao;
 
 import java.util.List;
 
+import org.apache.jasper.tagplugins.jstl.core.Choose;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -95,5 +96,9 @@ public class NoticeDao {
 	public List<NoticeCommand> searchByWriter(String writer){
 		String sql = "SELECT * FROM notice WHERE writer = ? LIKE '%" + writer +" %'";
 		return jdbcTemplate.query(sql, new NoticeRowMapper(), writer);
+	}
+	public List<NoticeCommand> selectSearchList(String type, String keyword){
+		String sql = "SELECT * FROM notice where "+type+ "LIKE '%" + keyword +" %'";
+		return jdbcTemplate.query(sql, new NoticeRowMapper(), type, keyword);
 	}
 }

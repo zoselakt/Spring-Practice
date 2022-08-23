@@ -78,4 +78,10 @@ public class NoticeServiceImpl implements NoticeService{
 		return dao.searchByWriter(writer);
 	}
 
+	
+	@Override
+	public List<NoticeCommand> selectSearchList(String type, String keyword) {
+		return dao.selectSearchList(type, keyword);
+	}
+
 }

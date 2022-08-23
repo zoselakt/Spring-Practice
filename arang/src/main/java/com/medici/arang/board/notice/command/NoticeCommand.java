@@ -15,4 +15,7 @@ public class NoticeCommand {
 	private String content;
 	private int readCnt;
 	private Timestamp regDate;
+	
+	private String type;
+	private String keyword;
 }

@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/login/input_style.css"/>
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
+  <script type="text/javascript" src="/fake_resources/js/notice.js"></script>
 </head>
 
 <body>
@@ -23,17 +24,18 @@
     <div class="board_wrapper">
       <h3 class="sub_title">My Storage</h3>
       <div>
-        <form>
+        <form name="search-form" method="get">
           <fieldset>
             <div class="field_inner">
               <label>검색어</label>
-              <select class= "searching" name="search-input">
-              	<option value="title">제목으로 검색</option>
-              	<option value="content">내용으로 검색</option>
-              	<option value="writer">작성자로 검색</option>
+              <select class= "search-input" name="type" id="search-input">
+              	<option id=option0 value="" selected>선택</option>
+              	<option id=option1 value="title">제목으로 검색</option>
+              	<option id=option2 value="content">내용으로 검색</option>
+              	<option id=option3 value="writer">작성자로 검색</option>
               </select>
-              <input type="text" class="search-input" name="search-input">
-              <a href="searchNoticeForm"><button class="board_btn" type="button">검색</button></a>
+              <input type="text" class="keyword" name="keyword" value="">
+              <button class="board_btn" type="button" onclick="getSearchList()">검색</button>
               <a href="insertNoticeForm"><button class="board_btn service"  type="button">공지작성</button></a>
             </div>
           </fieldset>
@@ -41,7 +43,7 @@
       </div>
       
       <form:form method="post">
-      <table class="storage_list artist">
+      <table class="storage_list artist" id="selectAll">
         <tr>
           <td>No.</td>
           <td>제목</td>

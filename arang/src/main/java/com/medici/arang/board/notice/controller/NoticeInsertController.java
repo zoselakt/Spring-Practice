@@ -32,10 +32,10 @@ public class NoticeInsertController {
 	public String insertPost(@ModelAttribute NoticeCommand noticeCommand, 
 			Model model, HttpServletRequest request) {
 		
-//		HttpSession session = request.getSession();
-//		String adminIdentified = (String) session.getAttribute("email");
-//		System.out.println(adminIdentified);
-//		noticeCommand.setWriter(adminIdentified);
+		HttpSession session = request.getSession();
+		String adminIdentified = (String) session.getAttribute("email");
+		System.out.println(adminIdentified);
+		noticeCommand.setWriter(adminIdentified);
 		
 		noticeServiceImpl.insertNotice(noticeCommand);
 		

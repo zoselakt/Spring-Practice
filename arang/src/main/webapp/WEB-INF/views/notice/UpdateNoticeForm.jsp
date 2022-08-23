@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function gomain() { location.href="notice"}
+	function gomain() { location.href="notice"};
 </script>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/artwork_upload.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/gallery_upload.css">
 </head>
+
 <body>
 
 <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
@@ -26,14 +27,14 @@
 	<table style="align-items: center; justify-content: center;">
 		<tr>
 			<td>제목</td>
-			<td><form:input path="title" class="title" type="text" size="70" maxlength="100" value="${noticeCommand.title}"/></td>
+			<td><form:input path="title" class="title" type="text" size="70" maxlength="100" value="${noticeCommand.title}" required=""/></td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><form:textarea path="content" class="content" cols="72" rows="20" value="${noticeCommand.content}"></form:textarea></td>
+			<td><form:textarea path="content" class="content" cols="72" rows="20" value="${noticeCommand.content}" required=""></form:textarea></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="수정하기"></td>
+			<td><button type="submit" id="location_replace">수정</button></td>
 			<td><input type="reset" value="작성취소"></td> 
 			<td><input type="button" onclick="gomain()" value="목록으로"></td>
 		</tr>
