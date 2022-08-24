@@ -2,7 +2,6 @@ package com.medici.arang.board.notice.dao;
 
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.Choose;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -101,4 +100,42 @@ public class NoticeDao {
 		String sql = "SELECT * FROM notice where "+type+ "LIKE '%" + keyword +" %'";
 		return jdbcTemplate.query(sql, new NoticeRowMapper(), type, keyword);
 	}
+		
+		//검색 기능(제목)
+		public Page<NoticeCommand> findAllbyTitle(Pageable pageable, String title){
+			Order order = pageable.getSort().isEmpty()
+					? Order.by("num")
+					: pageable.getSort().toList().get(0);
+			String sql = "SELECT num, title, writer, content, readCnt, regDate"					
+					+ " FROM notice"
+					+ " WHERE title like ?"
+					+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()
+					//MY SQL
+					+ " LIMIT " + pageable.getPageSize()
+					+ " OFFSET " + pageable.getOffset();
+			String Keyword = "%" + title + "%";
+			return new PageImpl<NoticeCommand>(
+					jdbcTemplate.query(sql, new NoticeRowMapper(), Keyword),
+					pageable,
+					getCount());
+			}
+		
+		//검색 기능(글쓴이)
+			public Page<NoticeCommand> findAllbyWriter(Pageable pageable, String writer){
+				Order order = pageable.getSort().isEmpty()
+						? Order.by("num")
+						: pageable.getSort().toList().get(0);
+				String sql = "SELECT num, title, writer, content, readCnt, regDate"					
+						+ " FROM notice"
+						+ " WHERE writer like ?"
+						+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()
+						//MY SQL
+						+ " LIMIT " + pageable.getPageSize()
+						+ " OFFSET " + pageable.getOffset();
+				String Keyword = "%" + writer + "%";
+				return new PageImpl<NoticeCommand>(
+						jdbcTemplate.query(sql, new NoticeRowMapper(), Keyword),
+						pageable,
+						getCount());
+				}
 }

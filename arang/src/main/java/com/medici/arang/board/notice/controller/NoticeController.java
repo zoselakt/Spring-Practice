@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
@@ -31,17 +32,26 @@ public class NoticeController {
 	
 	@GetMapping("notice/notice")
 	public String noticeAllFindGet(NoticeCommand command, Model model, 
-			HttpServletRequest request, HttpSession session) {
+			HttpServletRequest request, HttpSession session,
+			@RequestParam(required = false, defaultValue = "") String field,
+			@RequestParam(required = false, defaultValue = "") String word) {
 		List<NoticeCommand> noticeFindAll = noticeServiceImpl.findAllNotice();
 		model.addAttribute("noticeFindAll", noticeFindAll);
 		
+		// 페이징
 		int page = 0;
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));			
 		}
-		
-		Pageable pageable = PageRequest.of(page, 7, Sort.Direction.DESC, "regDate");
+		Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "regDate");
 		Page<NoticeCommand> noticeList = noticeServiceImpl.findAll(pageable);
+		
+		//검색기능
+		if(field.equals("title")) {
+			noticeList = noticeServiceImpl.findAllbyTitle(pageable, word);
+		}else if(field.equals("writer")){
+			noticeList = noticeServiceImpl.findAllbyWriter(pageable, word);
+		}
 		
 		//현재페이지
 		int pageNumber = noticeList.getPageable().getPageNumber();

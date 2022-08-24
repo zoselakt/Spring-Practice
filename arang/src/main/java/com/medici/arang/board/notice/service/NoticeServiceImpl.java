@@ -84,4 +84,14 @@ public class NoticeServiceImpl implements NoticeService{
 		return dao.selectSearchList(type, keyword);
 	}
 
+	@Override
+	public Page<NoticeCommand> findAllbyTitle(Pageable pageable, String title) {
+		return dao.findAllbyTitle(pageable, title);
+	}
+
+	@Override
+	public Page<NoticeCommand> findAllbyWriter(Pageable pageable, String writer) {
+		return dao.findAllbyWriter(pageable, writer);
+	}
+
 }

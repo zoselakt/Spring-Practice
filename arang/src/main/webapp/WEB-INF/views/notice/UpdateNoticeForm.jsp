@@ -12,33 +12,49 @@
 </script>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/artist/artist_focus.css">
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/gallery/gallery_focus.css">
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/artwork_upload.css">
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/gallery_upload.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_focus.css">
+  <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
 </head>
 
 <body>
-
-<jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
-
-<h1>공지수정</h1>
+  <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
+  
+  <div id="wrap">
+   <div class="headline_artworks">
+      <h3>NOTICE UPDATE</h3>
+    </div>
 <form:form method="post" modelAttribute="noticeCommand">
-	<table style="align-items: center; justify-content: center;">
-		<tr>
-			<td>제목</td>
-			<td><form:input path="title" class="title" type="text" size="70" maxlength="100" value="${noticeCommand.title}" required=""/></td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td><form:textarea path="content" class="content" cols="72" rows="20" value="${noticeCommand.content}" required=""></form:textarea></td>
-		</tr>
-		<tr>
-			<td><button type="submit" id="location_replace">수정</button></td>
-			<td><input type="reset" value="작성취소"></td> 
-			<td><input type="button" onclick="gomain()" value="목록으로"></td>
-		</tr>
-	</table>
-</form:form>
+    <div id="notice">
+      <div id="notice_detail">
+        <div class="container">
+          <div class="detail_wrapper d-flex">
+            <div class="side_block">
+              <div class="notice_info">
+                <div class="input_box_left">
+                  <h2>제목</h2>
+				  <form:input path="title" class="title" type="text" size="70" maxlength="100" value="${noticeCommand.title}"/>
+                  <input type="hidden" value="${noticeCommand.writer}">
+                </div>
+              </div>
+            </div>
+            <div class="side_block">
+              <div class="notice_info">
+                <div class="input_box_left">
+                  <h2>내용</h2>
+				  <form:textarea path="content" class="content" cols="72" rows="20"></form:textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="btn_group2">
+      <button type="submit" id="location_replace">수정</button> 
+	  <input type="reset" value="초기화">
+      <input type="button" onclick="gomain()" value="목록으로">
+    </div>
+    </div>
+    </form:form>
+    </div>
 </body>
 </html>

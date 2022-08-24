@@ -8,34 +8,31 @@
   <title>Notice</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
+	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/login/input_style.css"/>
-  <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
-  <script type="text/javascript" src="/fake_resources/js/notice.js"></script>
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_focus.css">
 </head>
 
 <body>
   <!-- header -->
   <div id="wrap">
-  
+  <br><br><br><br><br><br><br><br>
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
   
     <div class="board_wrapper">
       <h3 class="sub_title">My Storage</h3>
       <div>
-        <form name="search-form" method="get">
+		<form action="<c:url value='/notice/notice'/>" method="GET" name="search-form">
           <fieldset>
             <div class="field_inner">
               <label>검색어</label>
-              <select class= "search-input" name="type" id="search-input">
-              	<option id=option0 value="" selected>선택</option>
-              	<option id=option1 value="title">제목으로 검색</option>
-              	<option id=option2 value="content">내용으로 검색</option>
-              	<option id=option3 value="writer">작성자로 검색</option>
-              </select>
-              <input type="text" class="keyword" name="keyword" value="">
-              <button class="board_btn" type="button" onclick="getSearchList()">검색</button>
+              	<!-- 검색 영역 -->
+					<select name="field" id="field">
+						<option value="title">제목</option>
+						<option value="writer">글쓴이</option>
+					</select>
+					<input type="text" name="word" style="margin: 10px;"> 
+					<input type="submit" value="검색">
               <a href="insertNoticeForm"><button class="board_btn service"  type="button">공지작성</button></a>
             </div>
           </fieldset>
@@ -43,25 +40,29 @@
       </div>
       
       <form:form method="post">
-      <table class="storage_list artist" id="selectAll">
-        <tr>
-          <td>No.</td>
-          <td>제목</td>
-          <td>작성자</td>
-          <td>조회수</td>
-          <td>작성일</td>
+      <table id="selectAll" class="storage_list artist">
+      <thead class="theader">
+        <tr class="selectr">
+          <td class="selectd">No.</td>
+          <td class="selectd">제목</td>
+          <td class="selectd">작성자</td>
+          <td class="selectd">조회수</td>
+          <td class="selectd">작성일</td>
         </tr>
+      </thead>
+        <tbody class="tbodies">
         <c:forEach var="notice" items="${noticeList.content}">
-	        <tr>
-	          <td>${notice.num}</td>
-	          <td><a href="./findOneNoticeForm?num=${notice.num}">${notice.title}</a></td>
-	          <td>${notice.writer}</td>
-	          <td>${notice.readCnt}</td>
-	          <td>${notice.regDate}</td>
-	          <td><a href="./updateNoticeForm?num=${notice.num}">글 수정</a></td>
-			  <td><a href="./deleteNoticeForm?num=${notice.num}">글 삭제</a></td>
+	        <tr class="bodytr">
+	          <td class="bodytd">${notice.num}</td>
+	          <td class="bodytd"><a href="./findOneNoticeForm?num=${notice.num}">${notice.title}</a></td>
+	          <td class="bodytd">${notice.writer}</td>
+	          <td class="bodytd">${notice.readCnt}</td>
+	          <td class="bodytd">${notice.regDate}</td>
+	          <td class="bodytd"><a href="./updateNoticeForm?num=${notice.num}">수정</a></td>
+			  <td class="bodytd"><a href="./deleteNoticeForm?num=${notice.num}">삭제</a></td>
 	        </tr>
         </c:forEach>
+	    </tbody>
       </table>
       </form:form>
       

@@ -29,6 +29,8 @@ public class NoticeUpdateController {
 //		String adminIdentified = (String) session.getAttribute("writer");
 //		command.setWriter(adminIdentified);
 		
+		
+		request.setAttribute("noticeCommand", noticeCommand);
 		model.addAttribute("noticeCommand", noticeCommand);
 		return "notice/updateNoticeForm";
 	}
