@@ -11,6 +11,13 @@
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_focus.css">
+  
+  <script>
+	function selChange() {
+		var sel = document.getElementById('number').value;
+		location.href="notice?page=${noticeList.number}&number="+sel;
+	}
+</script>
 </head>
 
 <body>
@@ -68,6 +75,18 @@
       
       <!-- 페이징 버튼 영역 -->
 	<div class="paging-area">
+		<div style="float: right;">
+		<select id="pageNumber" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${noticeList.number == 5}">selected</c:if>>5줄 보기</option>
+			<option value="10"
+				<c:if test="${noticeList.number == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${noticeList.number == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${noticeList.number == 20}">selected</c:if>>20줄 보기</option>
+		</select>
+	</div>
 		<ul class="pagination">
 			<!-- 시작 -->
 			<c:choose>

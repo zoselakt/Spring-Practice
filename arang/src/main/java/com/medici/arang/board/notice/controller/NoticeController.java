@@ -43,7 +43,7 @@ public class NoticeController {
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));			
 		}
-		Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "regDate");
+		Pageable pageable = PageRequest.of(page, 5, Sort.Direction.DESC, "regDate");
 		Page<NoticeCommand> noticeList = noticeServiceImpl.findAll(pageable);
 		
 		//검색기능
