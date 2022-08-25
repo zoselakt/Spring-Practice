@@ -117,13 +117,13 @@
 }
 
 main {
-  min-height: calc(100vh - 50px + 80px + 51px));
+  min-height: calc(100vh - 50px + 80px + 51px);
 }
 
 /* 해드라인 */
 .headline_artworks {
   text-align: center;
-  margin-top: 170px;
+  margin-top: 100px;
 }
 
 .headline_artworks h3 {

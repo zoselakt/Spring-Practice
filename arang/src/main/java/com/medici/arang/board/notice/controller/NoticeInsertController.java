@@ -38,25 +38,27 @@ public class NoticeInsertController {
 	}
 	
 	@GetMapping("notice/insertNoticeForm")
-	public String insertGet(@ModelAttribute NoticeCommand noticeCommand, Model model) {
+	public String insertGet(@ModelAttribute NoticeCommand noticeCommand, Model model,
+			HttpServletRequest request) {
+		//아이디 세션유지
+		HttpSession session = request.getSession();
+		String adminIdentified = (String) session.getAttribute("email");
+		System.out.println(adminIdentified);
+		noticeCommand.setWriter(adminIdentified);
+		
 		model.addAttribute("noticeCommand", noticeCommand);
 		return "notice/insertNoticeForm";
 	}
 	
 	
 	// 파일업로드 경로 표시
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\JavaYoung\\";
 	private static final String PATH_DIR = "upload_img";
 	
-	@PostMapping("notice/insertNoticeForm")
+	@PostMapping("/notice/insertNoticeForm")
 	public String insertPost(@ModelAttribute NoticeCommand noticeCommand,
 			@RequestParam(value = "imgName2") List<MultipartFile> multiFileList,
-			Model model, HttpServletRequest request) throws Exception {
-		//아이디 세션유지
-		HttpSession session = request.getSession();
-		String adminIdentified = (String) session.getAttribute("email");
-		System.out.println(adminIdentified);
-		noticeCommand.setWriter(adminIdentified);
+			Model model) throws Exception {
 		
 		//파일업로드
 		File fileCheck = new File(SAVE_DIR);
@@ -94,7 +96,7 @@ public class NoticeInsertController {
 		String imgPathList = "";		
 		for (String string : imgList) {
 			imgPathList += PATH_DIR;
-			imgPathList += "notice\\";
+			imgPathList += "\\notice\\";
 			imgPathList += string;
 			imgPathList += ";";
 		}
@@ -103,13 +105,13 @@ public class NoticeInsertController {
 		//파일 실제 저장 하는 곳
 		try {
 			for(int i = 0; i < multiFileList.size(); i++) {
-				File uploadFile = new File(SAVE_DIR + "notice\\" + fileList.get(i).get("changeFile"));
+				File uploadFile = new File(SAVE_DIR + "\\notice\\" + fileList.get(i).get("changeFile"));
 				multiFileList.get(i).transferTo(uploadFile);
 			}
 		} catch (IllegalStateException | IOException e) {
 			// 업로드 실패시 파일 삭제
 			for(int i = 0; i < multiFileList.size(); i++) {
-				new File(SAVE_DIR + "notice\\" + fileList.get(i).get("changeFile")).delete();
+				new File(SAVE_DIR + "\\notice\\" + fileList.get(i).get("changeFile")).delete();
 			}
 			e.printStackTrace();
 		}

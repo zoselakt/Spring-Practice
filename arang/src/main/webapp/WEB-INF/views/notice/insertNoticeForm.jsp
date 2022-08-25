@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_All.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_CreateUpdate.css">
 <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 <script type="text/javascript">function gomain() { location.href="notice"}</script>
@@ -48,7 +48,7 @@ const remove = (obj) => {
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>제목</h2>
-				  <form:input path="title" class="title" type="text" size="70" maxlength="100"/>
+				  <form:input path="title" class="title" type="text" size="100" maxlength="100"/>
                   <input type="hidden" value="${noticeCommand.writer}">
                 </div>
               </div>
@@ -57,7 +57,7 @@ const remove = (obj) => {
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>내용</h2>
-				  <form:textarea path="content" class="content" cols="72" rows="200"></form:textarea>
+				  <form:textarea path="content" class="content" cols="100" rows="100"></form:textarea>
                 </div>
               </div>
             </div>

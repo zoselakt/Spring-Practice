@@ -76,6 +76,7 @@
       <!-- 페이징 버튼 영역 -->
 	<div class="paging-area">
 		<div style="float: right;">
+		<!-- 
 		<select id="pageNumber" name="sel" onchange="selChange()">
 			<option value="5"
 				<c:if test="${noticeList.number == 5}">selected</c:if>>5줄 보기</option>
@@ -86,6 +87,7 @@
 			<option value="20"
 				<c:if test="${noticeList.number == 20}">selected</c:if>>20줄 보기</option>
 		</select>
+		 -->
 	</div>
 		<ul class="pagination">
 			<!-- 시작 -->

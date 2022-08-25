@@ -12,7 +12,7 @@
 </script>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_All.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_CreateUpdate.css">
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
   <script>
