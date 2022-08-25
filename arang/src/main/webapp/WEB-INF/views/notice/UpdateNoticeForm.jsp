@@ -12,8 +12,27 @@
 </script>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_focus.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_All.css">
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+  <script>
+cnt = 0;
+const add_textbox = () => {
+	if ( cnt < 2 ) {
+		const box = document.getElementById("box2");
+		const newP = document.createElement('tr');
+		newP.innerHTML = "<div class='upload_box'> <input type='file' id='input-file' name='imgName2' multiple>"
+		+ "</div> <br> <input type='button' value='삭제' onclick='remove(this)'>";
+		box.appendChild(newP);
+		cnt++;
+	}
+}
+const remove = (obj) => {
+    document.getElementById('box2').removeChild(obj.parentNode);
+    cnt--;
+}
+</script>
+  
 </head>
 
 <body>
@@ -23,7 +42,7 @@
    <div class="headline_artworks">
       <h3>NOTICE UPDATE</h3>
     </div>
-<form:form method="post" modelAttribute="noticeCommand">
+<form:form method="post" modelAttribute="noticeCommand" enctype="multipart/form-data">
     <div id="notice">
     <c:forEach var="update" items="${noticeUpdate}">
       <div id="notice_detail">
@@ -46,17 +65,31 @@
                 </div>
               </div>
             </div>
+            <div class="side_block">
+              <div class="notice_info">
+	       		<h2>이미지</h2>
+	            <div id="box2">
+		       		<div class="upload_box">
+		      			 <input id="input-file" name="imgName2" type="file" placeholder="이미지등록" multiple/>
+		    		</div><br>
+	         		<input type="button" value="추가" onclick="add_textbox()">
+	     		</div>
+              </div>
+          </div>
           </div>
         </div>
       </div>
       </c:forEach>
     <div class="btn_group2">
-      <button type="submit" id="location_replace">수정</button> 
+      <button type="submit">수정</button> 
 	  <input type="reset" value="초기화">
       <input type="button" onclick="gomain()" value="목록으로">
     </div>
     </div>
     </form:form>
     </div>
+    
+    <script type="text/javascript" src="/fake_resources/js/ckeditor.js"></script>
+    
 </body>
 </html>

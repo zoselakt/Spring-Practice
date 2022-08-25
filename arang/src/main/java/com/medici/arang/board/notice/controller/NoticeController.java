@@ -3,7 +3,6 @@ package com.medici.arang.board.notice.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.service.NoticeServiceImpl;
@@ -70,31 +68,6 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeList);
 		
 		return "notice/notice";
-	}
-	
-	@GetMapping("/getSearchList")
-	@ResponseBody
-	public List<NoticeCommand> getSearchList (NoticeCommand command, Model model,
-			HttpServletResponse response, String type, String keyword) {
-		String commandType = command.getType();
-		String commandKeyword = command.getKeyword(); 
-//		String title = command.getTitle();
-//		List<NoticeCommand> searchTiele = noticeServiceImpl.searchByTitle(title);
-//		
-//		String content = command.getContent();
-//		List<NoticeCommand> searchContent = noticeServiceImpl.searchByContent(content);
-//		
-//		String writer = command.getWriter();
-//		List<NoticeCommand> searchWriter = noticeServiceImpl.searchByWriter(writer);
-//		
-//		model.addAttribute("searchTiele", searchTiele);
-//		model.addAttribute("searchContent", searchContent);
-//		model.addAttribute("searchWriter", searchWriter);
-		
-		List<NoticeCommand> search = noticeServiceImpl.selectSearchList(commandType, commandKeyword);
-		model.addAttribute("search", search);
-		
-		return search;
 	}
 	
 	@GetMapping("notice/findOneNoticeForm")

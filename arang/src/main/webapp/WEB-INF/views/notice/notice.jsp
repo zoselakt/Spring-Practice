@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
-  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_focus.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_All.css">
   
   <script>
 	function selChange() {

@@ -100,12 +100,6 @@ button {
 	justify-content: center;
 	align-items: center;
 }
-
-/*공지상세페이지*/
-.detail_wrapper{
-	padding-top: 50px;
-}
-
 /*페이지버튼*/
 
 .paging-area .pagination{

@@ -17,5 +17,6 @@ public class NoticeVo {
 	private String writer;
 	private String content;
 	private int readCnt;
+	private String imgPath;
 	private Timestamp regDate;
 }

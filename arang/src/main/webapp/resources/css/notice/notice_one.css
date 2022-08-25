@@ -1,0 +1,49 @@
+@charset "UTF-8";
+#command{
+    padding-top: 100px;
+}
+.table_a{
+    border-collapse: collapse;
+    width: 100%;
+}
+.table_a tr td{
+    border: 1px solid #ddd;
+    padding: 14px 8px 14px;
+    text-align: center;
+    width: 100%;
+}
+.textr{
+    display: flex;
+    justify-content: center;
+    height: 80px;
+}
+.textr .textd{
+    font-size: 22px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 14px 8px 14px;
+    text-align: center;
+    width: 100%;
+}
+.textr .title{
+    font-size: 22px;
+    font-weight: bold;
+}
+.textr .content{
+    font-size: 22px;
+    font-weight: bold;
+}
+/*button*/
+button{
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    box-sizing: border-box;
+}
+button:focus{ outline: none; }
+
+.button-group{
+    text-align: center;
+    margin-top: 5px;
+}
+

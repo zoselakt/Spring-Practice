@@ -166,12 +166,12 @@ a.galleryEmail, a.galleryPhone, a.since, a.area, a.openClose, a.galleryImgPath,
 b.description, b.infoImgPath FROM GalleryInfo b LEFT JOIN Gallery a 
 ON a.code = b.galleryCode;
 
-
-create table notice(
-   num            bigint            PRIMARY KEY  AUTO_INCREMENT,
-   title         varchar(50)         NOT NULL,
-   writer         varchar(50),
-   content         varchar(1000)      NOT NULL,
-   readCnt         int,
-   regDate         Timestamp         DEFAULT CURRENT_TIMESTAMP
-);
+CREATE TABLE notice(
+	num				BIGINT				PRIMARY KEY  AUTO_INCREMENT,
+	title			VARCHAR(100)		NOT NULL,
+	writer			VARCHAR(50),
+	content			VARCHAR(1000)		NOT NULL,
+	ImgPath			VARCHAR(50)		NOT NULL,
+	readCnt			INT,
+	regDate			TIMESTAMP			DEFAULT CURRENT_TIMESTAMP
+)auto_increment = 1;

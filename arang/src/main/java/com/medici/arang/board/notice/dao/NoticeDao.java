@@ -27,13 +27,14 @@ public class NoticeDao {
 	}
 	
 	public long insertNotice(NoticeCommand command) {
-		String sql = "INSERT INTO notice (title, writer, content, readCnt) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO notice (title, writer, content, imgPath, readCnt) VALUES(?,?,?,?,?)";
 		return jdbcTemplate.update(sql, command.getTitle(), command.getWriter(), 
-				command.getContent(), command.getReadCnt());
+				command.getContent(), command.getImgPath(), command.getReadCnt());
 	}
 	public long updateNotice(NoticeCommand command, long num) {
-		String sql = "UPDATE notice SET title = ?, content = ? WHERE num = ?";
-		return jdbcTemplate.update(sql, command.getTitle(), command.getContent(), num);
+		String sql = "UPDATE notice SET title = ?, content = ?, imgPath = ? WHERE num = ?";
+		return jdbcTemplate.update(sql, command.getTitle(), command.getContent(), 
+				command.getImgPath(), num);
 	}
 	public long deleteNotice(long num) {
 		String sql = "DELETE FROM notice WHERE num = ?";
@@ -72,7 +73,7 @@ public class NoticeDao {
 		Order order = pageable.getSort().isEmpty()
 				? Order.by("num")
 				: pageable.getSort().toList().get(0);
-		String sql = "SELECT num, title, writer, content, readCnt, regDate"					
+		String sql = "SELECT num, title, writer, content, readCnt, imgPath,regDate"					
 				+ " FROM notice "
 				+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()
 				//MY SQL
@@ -82,30 +83,13 @@ public class NoticeDao {
 		return new PageImpl<NoticeCommand>(
 				jdbcTemplate.query(sql, new NoticeRowMapper()), pageable, getCount());	
 	}
-	
-	public List<NoticeCommand> searchByTitle(String title){
-		String sql = "SELECT * FROM notice WHERE title = ? LIKE '%" + title +" %'";
-		return jdbcTemplate.query(sql, new NoticeRowMapper(), title);
-	}
-	public List<NoticeCommand> searchByContent(String content){
-		String sql = "SELECT * FROM notice WHERE content = ? LIKE '%" + content +" %'";
-		return jdbcTemplate.query(sql, new NoticeRowMapper(), content);
-	}
-	public List<NoticeCommand> searchByWriter(String writer){
-		String sql = "SELECT * FROM notice WHERE writer = ? LIKE '%" + writer +" %'";
-		return jdbcTemplate.query(sql, new NoticeRowMapper(), writer);
-	}
-	public List<NoticeCommand> selectSearchList(String type, String keyword){
-		String sql = "SELECT * FROM notice where "+type+ "LIKE '%" + keyword +" %'";
-		return jdbcTemplate.query(sql, new NoticeRowMapper(), type, keyword);
-	}
 		
 		//검색 기능(제목)
 		public Page<NoticeCommand> findAllbyTitle(Pageable pageable, String title){
 			Order order = pageable.getSort().isEmpty()
 					? Order.by("num")
 					: pageable.getSort().toList().get(0);
-			String sql = "SELECT num, title, writer, content, readCnt, regDate"					
+			String sql = "SELECT num, title, writer, content, readCnt, imgPath, regDate"					
 					+ " FROM notice"
 					+ " WHERE title like ?"
 					+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()
