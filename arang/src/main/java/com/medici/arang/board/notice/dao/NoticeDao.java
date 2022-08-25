@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.domain.NoticeRowMapper;
-import com.medici.arang.board.notice.domain.NoticeVo;
 
 import lombok.NoArgsConstructor;
 
@@ -44,10 +43,10 @@ public class NoticeDao {
 		String sql = "SELECT * FROM notice";
 		return jdbcTemplate.query(sql, new NoticeRowMapper());
 	}
-	public NoticeCommand findOneNotice(long num) {
+	public List<NoticeCommand> findOneNotice(long num) {
 		NoticeCount(num);
 		String sql = "SELECT * FROM notice WHERE num =?";
-		return jdbcTemplate.queryForObject(sql, new NoticeRowMapper(), num);
+		return jdbcTemplate.query(sql, new NoticeRowMapper(), num);
 	}
 	public long NoticeCount(long num) {
 		String sql = "UPDATE notice SET readCnt = readCnt + 1 WHERE num = ?";

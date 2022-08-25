@@ -1,5 +1,7 @@
 package com.medici.arang.board.notice.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.service.NoticeServiceImpl;
@@ -23,15 +26,15 @@ public class NoticeUpdateController {
 	
 	@GetMapping("notice/updateNoticeForm")
 	public String updateGet(@ModelAttribute NoticeCommand noticeCommand, Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request, @RequestParam long num) {
 //		HttpSession session = request.getSession();
 //		String getEmail = (String) session.getAttribute("email");
 //		String adminIdentified = (String) session.getAttribute("writer");
 //		command.setWriter(adminIdentified);
-		
+		List<NoticeCommand> noticeUpdate = noticeServiceImpl.findOneNotice(num);
 		
 		request.setAttribute("noticeCommand", noticeCommand);
-		model.addAttribute("noticeCommand", noticeCommand);
+		model.addAttribute("noticeUpdate", noticeUpdate);
 		return "notice/updateNoticeForm";
 	}
 	@PostMapping("notice/updateNoticeForm")

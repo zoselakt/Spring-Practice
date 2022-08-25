@@ -13,8 +13,8 @@
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
 <script type="text/javascript">
 	function gomain() { location.href="notice"}
-	function goupdate() { location.href="updateNoticeForm?num=${noticeFindOne.num}"}
-	function godelete() { location.href="deleteNoticeForm?num=${noticeFindOne.num}"}
+	function goupdate() { location.href="updateNoticeForm?num=${findOne.num}"}
+	function godelete() { location.href="deleteNoticeForm?num=${findOne.num}"}
 	
       function location_replace(){          
 		  var link_url = "notice";      
@@ -34,16 +34,17 @@
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
   
   <div id="wrap">
-<form:form method="post" modelAttribute="noticeCommand">
+<form:form method="post">
     <div id="notice">
       <div id="notice_detail">
         <div class="container">
           <div class="detail_wrapper d-flex">
+          <c:forEach var="findOne" items="${noticeFindOne}">
             <div class="side_top">
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>번호</h2>
-				  <div>${noticeFindOne.num}</div>
+				  <div>${findOne.num}</div>
                 </div>
               </div>
             </div>
@@ -51,7 +52,7 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>작성일</h2>
-				  <div>${noticeFindOne.regDate}</div>
+				  <div>${findOne.regDate}</div>
                 </div>
               </div>
             </div>
@@ -59,7 +60,7 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>작성자</h2>
-				  <div>${noticeFindOne.writer}</div>
+				  <div>${findOne.writer}</div>
                 </div>
               </div>
             </div>
@@ -67,7 +68,7 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>제목</h2>
-				  <div>${noticeFindOne.title}</div>
+				  <div>${findOne.title}</div>
                 </div>
               </div>
             </div>
@@ -75,10 +76,11 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>내용</h2>
-				  <div>${noticeFindOne.content}</div>
+				  <div>${findOne.content}</div>
                 </div>
               </div>
             </div>
+            </c:forEach>
       		<input type="button" onclick="gomain()" value="목록으로">
       		<input type="button" onclick="goupdate()" value="수정">
       		<input type="button" onclick="godelete()" value="삭제">

@@ -25,6 +25,7 @@
     </div>
 <form:form method="post" modelAttribute="noticeCommand">
     <div id="notice">
+    <c:forEach var="update" items="${noticeUpdate}">
       <div id="notice_detail">
         <div class="container">
           <div class="detail_wrapper d-flex">
@@ -32,8 +33,8 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>제목</h2>
-				  <form:input path="title" class="title" type="text" size="70" maxlength="100" value="${noticeCommand.title}"/>
-                  <input type="hidden" value="${noticeCommand.writer}">
+				  <form:input path="title" class="title" type="text" size="70" maxlength="100" value="${update.title}"/>
+                  <!-- <input type="hidden" value="${noticeCommand.writer}"> -->
                 </div>
               </div>
             </div>
@@ -41,13 +42,14 @@
               <div class="notice_info">
                 <div class="input_box_left">
                   <h2>내용</h2>
-				  <form:textarea path="content" class="content" cols="72" rows="20"></form:textarea>
+				  <textarea id="content" name="content" cols="72" rows="20">${update.content}</textarea>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      </c:forEach>
     <div class="btn_group2">
       <button type="submit" id="location_replace">수정</button> 
 	  <input type="reset" value="초기화">

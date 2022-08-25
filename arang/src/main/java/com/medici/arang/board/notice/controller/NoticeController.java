@@ -32,7 +32,7 @@ public class NoticeController {
 	
 	@GetMapping("notice/notice")
 	public String noticeAllFindGet(NoticeCommand command, Model model, 
-			HttpServletRequest request, HttpSession session,
+			HttpServletRequest request, HttpSession session, 
 			@RequestParam(required = false, defaultValue = "") String field,
 			@RequestParam(required = false, defaultValue = "") String word) {
 		List<NoticeCommand> noticeFindAll = noticeServiceImpl.findAllNotice();
@@ -98,16 +98,16 @@ public class NoticeController {
 	}
 	
 	@GetMapping("notice/findOneNoticeForm")
-	public String noticeOneFind(NoticeCommand command, Model model) {
-		long getNum = command.getNum();
-		NoticeCommand noticeFindOne = noticeServiceImpl.findOneNotice(getNum);
+	public String noticeOneFind(NoticeCommand noticeCommand, Model model, @RequestParam long num, HttpServletRequest request) {
+		List<NoticeCommand> noticeFindOne = noticeServiceImpl.findOneNotice(num);
+		
+		request.setAttribute("noticeCommand", noticeCommand);
 		model.addAttribute("noticeFindOne", noticeFindOne);
 		return "notice/findOneNoticeForm";
 	}
 	@PostMapping("notice/findOneNoticeForm")
-	public String noticeOnePost(NoticeCommand command, Model model) {
-		long getNum = command.getNum();
-		NoticeCommand noticeFindOne = noticeServiceImpl.findOneNotice(getNum);
+	public String noticeOnePost(NoticeCommand command, Model model, @RequestParam long num) {
+		List<NoticeCommand> noticeFindOne = noticeServiceImpl.findOneNotice(num);
 		model.addAttribute("noticeFindOne", noticeFindOne);
 		return "notice/findOneNoticeForm";
 	}	

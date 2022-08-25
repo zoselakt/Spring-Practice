@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.dao.NoticeDao;
-import com.medici.arang.board.notice.domain.NoticeVo;
 
 public class NoticeServiceImpl implements NoticeService{
 	NoticeDao dao = new NoticeDao();
@@ -39,7 +38,7 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public NoticeCommand findOneNotice(long num) {
+	public List<NoticeCommand> findOneNotice(long num) {
 		return dao.findOneNotice(num);
 	}
 
