@@ -26,6 +26,7 @@ public class GalleryRowMapper implements RowMapper<GalleryCommand>{
 		vo.setRepresenter(rs.getString("representer"));
 		vo.setRepresenterNum(rs.getString("representerNum"));
 		vo.setGalleryImgPath(rs.getString("galleryImgPath"));
+		vo.setRegDate(rs.getTimestamp("regDate"));
 		return vo;
 	}
 }	

@@ -48,14 +48,6 @@
                 <tr>
                 	<td class="inner-content">${findOne.content}</td>
                 </tr>
-                <tr>
-	                <td>
-		                <c:forTokens var="imgPath" items="${findOne.imgPath}" delims=";">
-		            		<img src="${imgPath}">
-		            	</c:forTokens>
-	            	</td>
-                </tr>
-                
                 </c:forEach>
             </table>
             <div class="button-group">

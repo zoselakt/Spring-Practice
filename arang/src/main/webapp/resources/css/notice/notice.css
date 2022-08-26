@@ -1,0 +1,136 @@
+@charset "UTF-8";
+/*전체 UI*/
+#wrap{
+    max-width: 980px;
+    min-width: 768px;
+    margin: 0 auto;
+}
+#wrap .title{
+    position: relative;
+    padding: 10px 0 0;
+    border-bottom: 2px solid #333;
+}
+#wrap .title h1{
+    display: inline-block;
+    font-size: 25px;
+    line-height: 1;
+    color: #333;
+}
+#wrap .title .prec{
+    float: right;
+    height: 25px;
+    line-height: 25px;
+    padding: 0;
+    color: #666;
+}
+#wrap .title .prec em{
+    font-size: 8px;
+    color: #f85858;
+    margin-right: 5px;
+}
+.table_a{
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+.table_a tr td{
+    position: relative;
+    border: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+    padding: 14px 8px 14px;
+    font-size: 14px;
+}
+.table_a tr td > *{float: left;}
+.table_a tr td:nth-child(1){ width: 120px; color: #333; }
+.table_a td > i{ margin: 5px 5px 0; }
+.table_a tr td em{
+    position: absolute;
+    display: inline-block;
+    font-size: 14px;
+    color: #f82828;
+    left: 0;
+}
+.txt{
+    display: inline-block;
+    font-size: 14px;
+    color: #999;
+    margin: 5px 0 0 5px;
+}
+/*인풋 디폴트 스타일*/
+input{
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+/* input size type */
+input.big { width: 478px; }
+input.middle{ width: 250px; }
+input.small{ width: 150px; }
+input.tiny{ width: 100px; }
+input:focus{ outline: none; border: 1px solid #9d9d9d; }
+
+/* check box label style */
+input[type=checkbox]{ display: none; }
+input[type=checkbox] + label {
+    position: relative;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    border: 1px solid #999;
+    margin: 5px 0 0 12px;
+}
+
+input[type=checkbox]:checked + label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 0px;
+    height: 1.5px;
+    top: 50%;
+    left: 50%;
+    padding: 3px;
+    border-style: solid;
+    border-color: red;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg) translateX(-50%) translateY(-50%);
+}
+
+/*button*/
+button{
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    box-sizing: border-box;
+}
+button:focus{ outline: none; }
+.gbtn{ padding: 10px 15px; }
+.gbtn.normal{
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 15px;
+    min-width: 110px;
+    background-color: #333;
+}
+
+/* button color style */
+.gbtn.gray{
+    background-color: #818286;
+}
+.gbtn.transparent{
+    color: black;
+    border: 1px solid #999;
+    background-color: transparent;
+}
+input + .gbtn{
+    margin-left: 5px;
+}
+
+.gbtn.transparent:focus{
+    border: 1px solid #333;
+}
+
+.button-group{
+    text-align: center;
+    margin-top: 5px;
+}

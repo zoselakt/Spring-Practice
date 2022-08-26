@@ -18,7 +18,7 @@ public class NoticeRowMapper implements RowMapper<NoticeCommand>{
 		command.setWriter(rs.getString("writer"));
 		command.setContent(rs.getString("content"));
 		command.setReadCnt(rs.getInt("readCnt"));
-		command.setImgPath(rs.getString("imgPath"));
+//		command.setImgPath(rs.getString("imgPath"));
 		command.setRegDate(rs.getTimestamp("regDate"));
 		return command;
 	}

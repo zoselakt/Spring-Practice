@@ -27,14 +27,13 @@ public class NoticeDao {
 	}
 	
 	public long insertNotice(NoticeCommand command) {
-		String sql = "INSERT INTO notice (title, writer, content, imgPath, readCnt) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO notice (title, writer, content, readCnt) VALUES(?,?,?,?)";
 		return jdbcTemplate.update(sql, command.getTitle(), command.getWriter(), 
-				command.getContent(), command.getImgPath(), command.getReadCnt());
+				command.getContent(), command.getReadCnt());
 	}
 	public long updateNotice(NoticeCommand command, long num) {
-		String sql = "UPDATE notice SET title = ?, content = ?, imgPath = ? WHERE num = ?";
-		return jdbcTemplate.update(sql, command.getTitle(), command.getContent(), 
-				command.getImgPath(), num);
+		String sql = "UPDATE notice SET title = ?, content = ? WHERE num = ?";
+		return jdbcTemplate.update(sql, command.getTitle(), command.getContent(), num);
 	}
 	public long deleteNotice(long num) {
 		String sql = "DELETE FROM notice WHERE num = ?";
@@ -73,7 +72,7 @@ public class NoticeDao {
 		Order order = pageable.getSort().isEmpty()
 				? Order.by("num")
 				: pageable.getSort().toList().get(0);
-		String sql = "SELECT num, title, writer, content, readCnt, imgPath,regDate"					
+		String sql = "SELECT num, title, writer, content, readCnt, regDate"					
 				+ " FROM notice "
 				+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()
 				//MY SQL
@@ -89,7 +88,7 @@ public class NoticeDao {
 			Order order = pageable.getSort().isEmpty()
 					? Order.by("num")
 					: pageable.getSort().toList().get(0);
-			String sql = "SELECT num, title, writer, content, readCnt, imgPath, regDate"					
+			String sql = "SELECT num, title, writer, content, readCnt, regDate"					
 					+ " FROM notice"
 					+ " WHERE title like ?"
 					+ " ORDER BY " + order.getProperty() + " " + order.getDirection().name()

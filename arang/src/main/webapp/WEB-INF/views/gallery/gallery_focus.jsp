@@ -43,67 +43,65 @@
       <div id="artist_detail">
         <div class="container">
           <div class="detail_wrapper d-flex">
+			<c:forEach var="focus" items="${galleryCommand}">         
             <div class="side_block">
               <div class="artist_info">
-                <h3>${galleryCommand.galleryName_kor}</h3>
-                <p class="e_name">${galleryCommand.galleryName_eng}</p>
-                <p class="born">${galleryCommand.since}</p>
-                <div class="artist_avatar">
-                  <img src="${galleryCommand.galleryImgPath}" alt="2">
-                </div>
+                <h3 class="k_name">${focus.galleryName_kor}</h3>
+                <div class="e_name">${focus.galleryName_eng}</div>
+                <div class="born">${focus.since}</div>
+                <div class="artist_avatar"><img src="${focus.galleryImgPath}" alt="2"></div>
               </div>
             </div>
             <div class="content_block">
               <div class="review">
-                <h2>${galleryCommand.galleryName_eng}</h2>
-                <p>${galleryCommand.description}</p>
+                <h2>${focus.galleryName_eng}</h2>
+                <p>${focus.description}</p>
                 <p><br></p>
                 <p>
-                <c:forTokens var="infoImg" items="${galleryCommand.infoImgPath}" delims=";">
-            		<img src="${infoImg}">
-            	</c:forTokens>
+                <c:forTokens var="infoImg" items="${GalleryInfoCommand.infoImgPath}" delims=";">
+            	  	<img src="${infoImg}">
+            	  </c:forTokens>
                 </p>
               </div>
               <div class="product">
-                <h4 class="sub_title">Gallery Infomation</h4>
-                <div class="artwork_simul">
-                  <div class="artwork_wrapper">
-                    <div class="artwork_info_wrap">
-                      <div class="artwork_info">
-                        <div class="info">
-                          <div class="info_block">
-                            <div class="first">주소(Address)</div>
-                            <div class="last">
-                              ${galleryCommand.address}
-                            </div>
-                          </div>
-                          <div class="info_block">
-                            <div class="first">크기(Size)</div>
-                            <div class="last">
-                              ${galleryCommand.area}
-                            </div>
-                          </div>
-                          <div class="info_block">
-                            <div class="first">시간(Hours)</div>
-                            <div class="last">
-                              ${galleryCommand.openClose}
-                            </div>
-                          </div>
-                          <div class="info_block">
-                            <div class="first">이메일(Email)</div>
-                            <div class="last">${galleryCommand.galleryEmail}</div>
-                          </div>
-                          <div class="info_block">
-                            <div class="first">전화번호(Phone)</div>
-                            <div class="last">${galleryCommand.galleryPhone}</div>
-                          </div>
+              <h4 class="sub_title">Gallery Infomation</h4>
+              <div class="artwork_simul">
+                <div class="artwork_wrapper">
+                  <div class="artwork_info_wrap">
+                    <div class="artwork_info">
+                      <div class="info">
+                        <div class="info_block">
+                          <div class="first">주소(Address)</div>
+                          <div class="last">${focus.address}</div>
                         </div>
+                        <div class="info_block">
+                          <div class="first">크기(Size)</div>
+                          <div class="last">${focus.area}</div>
+                        </div>
+                        <div class="info_block">
+                          <div class="first">시간(Hours)</div>
+                          <div class="last">${focus.openClose}</div>
+                        </div>
+                        <div class="info_block">
+                          <div class="first">이메일(Email)</div>
+                          <div class="last">${focus.galleryEmail}</div>
+                        </div>
+                        <div class="info_block">
+                          <div class="first">전화번호(Phone)</div>
+                          <div class="last">${focus.galleryPhone}</div>
+                        </div>
+                      </div>
                       </div>
                       <div class="button_wrap">
                         <div class="btn_group">
-                          <a href="#"><button class="btn1">Contacting</button></a>
-                          <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
-                          <p>76</p>
+                          <div class="left_button">
+                            <a href="gallery_update?code=${focus.code}"><button class="btn1">수정</button></a>
+                            <a href="gallery_delete?code=${focus.code}"><button class="btn1">삭제</button></a>
+                          </div>
+                          <div class="right_button">
+                            <a href="#"><button class="btn1">Contacting</button></a>
+                            <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -111,29 +109,25 @@
                 </div>
               </div>
             </div>
+         	</c:forEach>
             <div class="side_block">
               <div class="a_list">
                 <h3>추천작가</h3>
                 <ul>
-                  <li>
-                    <a href="#">신수희</a>
-                  </li>
-                  <li>
-                    <a href="#">최선호</a>
-                  </li>
+                  <li><a href="#">신수희</a></li>
+                  <li><a href="#">최선호</a></li>
                 </ul>
               </div>
               <div class="a_banner">
                 <h3>이달의 전시</h3>
                 <a href="#"><img class="exhibition_banner" src="/upload_img/banner/김선배너.jpg" alt="exhibition_banner"></a>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+             </div>
+           </div>
+         </div>
+       </div>
+	 </div>
+   </div>
 </body>
 
 </html>

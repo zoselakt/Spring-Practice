@@ -2,9 +2,6 @@ package com.medici.arang.board.gallery.command;
 
 import java.sql.Timestamp;
 
-import com.medici.arang.user.domain.GalleristVo;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,4 +22,5 @@ public class GalleryCommand {
 	private String representer;
 	private String representerNum; 
 	private String galleryImgPath; 
+	private Timestamp regDate;
 }

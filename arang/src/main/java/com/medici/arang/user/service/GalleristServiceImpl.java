@@ -1,12 +1,10 @@
 package com.medici.arang.user.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.medici.arang.user.dao.GalleristDao;
 import com.medici.arang.user.command.GalleristCommend;
-import com.medici.arang.user.domain.GalleristVo;
 
 public class GalleristServiceImpl implements GalleristService{
 	

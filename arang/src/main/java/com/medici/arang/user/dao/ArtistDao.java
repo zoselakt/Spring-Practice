@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.data.domain.Page;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.medici.arang.board.artist.command.ArtworkCommand;
 import com.medici.arang.user.command.ArtistCommand;
 import com.medici.arang.user.command.ArtistPageCommand;
 

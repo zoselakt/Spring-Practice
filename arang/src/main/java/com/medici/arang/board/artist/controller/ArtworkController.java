@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.medici.arang.board.artist.command.ArtistInfoCommand;
 import com.medici.arang.board.artist.command.ArtworkCommand;
 import com.medici.arang.board.artist.command.ArtworkInfoCommand;
 import com.medici.arang.board.artist.command.FindArtistInfoCommand;
@@ -30,7 +28,6 @@ import com.medici.arang.board.artist.service.ArtistInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkServiceImpl;
 import com.medici.arang.user.command.ArtistCommand;
-import com.medici.arang.user.command.ArtistPageCommand;
 import com.medici.arang.user.service.ArtistServiceImpl;
 
 @MultipartConfig(

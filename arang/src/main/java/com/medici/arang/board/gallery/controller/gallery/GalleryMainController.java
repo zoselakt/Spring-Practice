@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.medici.arang.board.gallery.command.GalleryPageCommand;
 import com.medici.arang.board.gallery.service.GalleryInfoServiceImpl;
 import com.medici.arang.board.gallery.service.GalleryServiceImpl;
-import com.medici.arang.user.command.ArtistPageCommand;
 
 @Controller
 public class GalleryMainController {
@@ -50,7 +49,7 @@ public class GalleryMainController {
 			page = Integer.parseInt(request.getParameter("page"));			
 		}
 		//페이징
-		Pageable pageable = PageRequest.of(page, 1, Sort.Direction.DESC, "code");
+		Pageable pageable = PageRequest.of(page, 3, Sort.Direction.DESC, "code");
 		Page<GalleryPageCommand> galleryPagingList = 
 				galleryInfoService.allFindGalleryPage(pageable);
 		
@@ -73,8 +72,6 @@ public class GalleryMainController {
 			galleryCommand.setInfoImgPath(c);
 		}
 		
-		
-		
 		model.addAttribute("startBlockPage", startBlockPage);
 		model.addAttribute("endBlockPage", endBlockPage);
 		model.addAttribute("galleryPagingList", galleryPagingList);
@@ -83,10 +80,10 @@ public class GalleryMainController {
 	}
 	
 	@GetMapping("/gallery/gallery_focus")
-	public String GalleryInfoForm(@RequestParam("code") long code, Model model) {
-		GalleryPageCommand galleryCommand = galleryInfoService.findGalleryByID(code);
+	public String GalleryInfoForm(GalleryPageCommand galleryPageCommand,@RequestParam("code") long code, Model model) {
+		List<GalleryPageCommand> galleryCommand = galleryInfoService.findGalleryByID(code);
 		model.addAttribute("galleryCommand", galleryCommand);
-		
+		model.addAttribute("galleryPageCommand", galleryPageCommand);
 		return "gallery/gallery_focus";
 	}
 	

@@ -71,8 +71,10 @@
   bottom: 42px;
 }
 
-.button_wrap .btn_group {
+.button_wrap .btn_group{
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 button {

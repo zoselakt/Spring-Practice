@@ -6,13 +6,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>갤러리상세업로드</title>
+  <title>갤러리 업데이트</title>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/artist/artist_focus.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/gallery/gallery_focus.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/artwork_upload.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/gallery_upload.css">
+  <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 </head>
 <script type="text/javascript">
 	function gomain() { location.href="gallery"};
@@ -36,29 +37,27 @@ const remove = (obj) => {
 </script>
 
 <body>
-  <div id="wrap">
-  
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
-
+  
+  <div id="wrap">
     <div class="headline_artworks">
-      <h3>GALLERY PAGE</h3>
-      <div class="sub-txt">
-        아래 양식을 채워 갤러리 페이지를 만드세요!
-      </div>
+      <h3>GALLERY UPDATE</h3>
     </div>
 
     <!-- 갤러리상세페이지 -->
-    <form:form method="post" enctype="multipart/form-data">
+  <form:form method="post" modelAttribute="galleryCommand" enctype="multipart/form-data">
     <div id="artist">
+    <c:forEach var="update" items="${galleryUpdate}">
       <div id="artist_detail">
         <div class="container">
           <div class="detail_wrapper d-flex">
             <div class="side_block">
               <div class="artist_info">
                 <div class="input_box_left">
-                  <input type="text" placeholder="갤러리이름(한글)" name="galleryName_kor">
-                  <input type="text" placeholder="갤러리이름(영문)" name="galleryName_eng">
-                  <input type="text" placeholder="년도 ex)2002" name="since">
+                  <input type="text" placeholder="갤러리이름(한글)" name="galleryName_kor" value="${update.galleryName_kor}">
+                  <input type="text" placeholder="갤러리이름(영문)" name="galleryName_eng" value="${update.galleryName_eng}">
+                  <input type="text" placeholder="년도 ex)2002" name="since" value="${update.since}">
+                  <input type="hidden" name="galleristEmail">
                   <div class="artist_avatar">
                     <input type="file" id="input-file" name="imgName2" multiple>
                     <!-- <img src="../resources/img/gallerys/2.jpg" alt="2"> -->
@@ -69,17 +68,19 @@ const remove = (obj) => {
             <div class="content_block">
               <div class="review">
                 <h2>ARARIO GALLERY</h2>
-                <p><textarea class="textarea_box" placeholder="갤러리 소개" cols="43" rows="7" name="description"></textarea></p>
+                <p><textarea id="content" class="textarea_box" name="description" cols="43" rows="7">${GalleryInfoCommand.description}</textarea></p>
                 <p><br></p>
+                <p>
                 <div id="box2">
               	<input type="button" value="추가" onclick="add_textbox()">
-              		<div class="upload_box">
-         		  		 <input type="file" id="input-file" name="imgName2" multiple>
-              		</div>
+              	<c:forTokens var="infoImg" items="${GalleryInfoCommand.infoImgPath}" delims=";">
+            		<img src="${infoImg}">
+            	</c:forTokens>
         		</div>
+                </p>
               </div>
               <div class="product">
-                <h4 class="sub_title">Gallery Infomation</h4>
+                <h4 class="sub_title">Gallery Information</h4>
                 <div class="artwork_simul">
                   <div class="artwork_wrapper">
                     <div class="artwork_info_wrap">
@@ -88,32 +89,32 @@ const remove = (obj) => {
                           <div class="info_block">
                             <div class="first">주소(Address)</div>
                             <div class="last">
-                              <input type="text" placeholder="주소" name="address">
+                              <input type="text" placeholder="주소" name="address" value="${update.address}">
                             </div>
                           </div>
                           <div class="info_block">
                             <div class="first">크기(Size)</div>
                             <div class="last">
-                              <input type="text" placeholder="ex) 전시면적 900㎡ / 9층" name="area">
+                              <input type="text" placeholder="ex) 전시면적 900㎡ / 9층" name="area" value="${update.area}">
                             </div>
                           </div>
                           <div class="info_block">
                             <div class="first">시간(Hours)</div>
                             <div class="last">
-                              <input type="text" placeholder="ex) 오전 11시 ~ 오후 6시 (월요일 휴관)" name="openClose">
+                              <input type="text" placeholder="ex) 오전 11시 ~ 오후 6시 (월요일 휴관)" name="openClose" value="${update.openClose}">
                             </div>
                           </div>
                           <div class="info_block">
                             <div class="first">이메일(Email)</div>
-                            <input type="text" placeholder="이메일" name="galleryEmail">
+                            <input type="text" placeholder="이메일" name="galleryEmail" value="${update.galleryEmail}">
                           </div>
                           <div class="info_block">
                             <div class="first">전화번호(Phone)</div>
-                            <input type="text" placeholder="전화번호" name="galleryPhone">
+                            <input type="text" placeholder="전화번호" name="galleryPhone" value="${update.galleryPhone}">
                             <br>
-                            <input type="text" placeholder="갤러리스트네임" name="representer">
+                            <input type="text" placeholder="갤러리스트네임" name="representer" value="${update.representer}">
                             <br>
-                            <input type="text" placeholder="갤러리스트넘버" name="representerNum">
+                            <input type="text" placeholder="갤러리스트넘버" name="representerNum" value="${update.representerNum}">
                           </div>
                         </div>
                       </div>
@@ -122,34 +123,16 @@ const remove = (obj) => {
                 </div>
               </div>
             </div>
-            <div class="side_block">
-              <div class="a_list">
-                <h3>추천작가</h3>
-                <ul>
-                  <li>
-                    <a href="#">신수희</a>
-                  </li>
-                  <li>
-                    <a href="#">최선호</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="a_banner">
-                <h3>이달의 전시</h3>
-                <a href="#"><img class="exhibition_banner" src="/fake_resources/img/김선배너.jpg" alt="exhibition_banner"></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          </c:forEach>
 	    <div class="btn_group2">
-	      <button type="submit">등록</button> 
+	      <button type="submit">수정</button> 
 		  <input type="reset" value="초기화">
 	      <input type="button" onclick="gomain()" value="목록으로">
 	    </div>
     </div>
     </form:form>
   </div>
+  
+  <script type="text/javascript" src="/fake_resources/js/ckeditor.js"></script>
 </body>
-
 </html>

@@ -1,16 +1,13 @@
 package com.medici.arang.user.dao;
 
-
-
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.medici.arang.board.gallery.domain.GalleristRowMapper;
 import com.medici.arang.user.command.GalleristCommend;
-import com.medici.arang.user.domain.GalleristVo;
+import com.medici.arang.user.domain.GalleristRowMapper;
 
 import lombok.NoArgsConstructor;
 

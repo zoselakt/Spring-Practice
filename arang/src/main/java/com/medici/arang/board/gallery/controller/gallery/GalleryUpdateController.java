@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,42 +21,43 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.medici.arang.board.gallery.command.GalleryCommand;
 import com.medici.arang.board.gallery.command.GalleryInfoCommand;
+import com.medici.arang.board.gallery.command.GalleryPageCommand;
 import com.medici.arang.board.gallery.service.GalleryInfoServiceImpl;
 import com.medici.arang.board.gallery.service.GalleryServiceImpl;
 
-@MultipartConfig(
-		fileSizeThreshold = 1024*1024,	
-		maxFileSize = 1024*1024*100, 		//1024메가
-		maxRequestSize = 1024*1024*1024*10) 	// 1024메가 5개까지
-@Controller("galleryInsertController")
-public class GalleryInsertController {
-	
+@Controller("galleryUpdateController")
+public class GalleryUpdateController {
 	@Autowired
 	private GalleryServiceImpl galleryServiceImpl;
 	
 	@Autowired
 	private GalleryInfoServiceImpl galleryInfoServiceImpl;
-	
-	
-	@GetMapping("gallery/gallery_upload")
-	public String insertGallery(Model model, GalleryCommand galleryCommand, HttpServletRequest request) {
-		model.addAttribute("galleryCommand", galleryCommand);
-		return "gallery/gallery_upload";
+		
+	@GetMapping("gallery/gallery_update")
+	public String galleyUpdate(GalleryCommand galleryCommand, GalleryInfoCommand gInfoCommand, 
+			Model model, HttpServletRequest request, @RequestParam long code) {
+		//세션유지
+		HttpSession session = request.getSession();
+		String galleristEmail = (String) session.getAttribute("email");
+		System.out.println(galleristEmail);
+		
+		//value값 불러오기
+		List<GalleryCommand> galleryUpdate = galleryServiceImpl.findOneGallery(code);
+		model.addAttribute("galleryUpdate", galleryUpdate);
+		
+		List<GalleryPageCommand> galleryInfoCommand = galleryInfoServiceImpl.findGalleryByID(code);
+		model.addAttribute("galleryInfoCommand", galleryInfoCommand);
+		return "gallery/gallery_update";
 	}
 	
 	//이미지 저장될 경로
 	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
-	@PostMapping("gallery/gallery_upload")
+	@PostMapping("gallery/gallery_update")
 	public String insertGalleryForm(GalleryCommand galleryCommand, GalleryInfoCommand infoCommand,
 					@RequestParam("imgName2") List<MultipartFile> multiFileList,
 					HttpServletRequest request, Model model) throws Exception {
-		
-		HttpSession session = request.getSession();
-		String galleristEmail = (String) session.getAttribute("email");
-		System.out.println(galleristEmail);
-		galleryCommand.setGalleristEmail(galleristEmail);
 		
 		File fileCheck = new File(SAVE_DIR);
 		//해당 폴더가 없으면 생성하는거
@@ -122,12 +122,10 @@ public class GalleryInsertController {
 		String imgName = galleryCommand.getGalleryImgPath();
 		System.out.println(imgName);
 		
-		galleryServiceImpl.insertGallery(galleryCommand);
-		String representerNum = galleryCommand.getRepresenterNum();
-		GalleryCommand a = galleryServiceImpl.findAllGalleryByRepresenterNum(representerNum);
-		infoCommand.setGalleryCode(a.getCode());
-		galleryInfoServiceImpl.insertGalleryInfo(infoCommand);
+		long getCode = galleryCommand.getCode();
+		galleryServiceImpl.updateGallery(galleryCommand, getCode);
 		
 		return "redirect:gallery";
 	}
 }
+

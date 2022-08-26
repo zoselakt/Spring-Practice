@@ -61,17 +61,6 @@ const remove = (obj) => {
                 </div>
               </div>
             </div>
-             <div class="side_block">
-              <div class="notice_info">
-	       		<h2>이미지</h2>
-	            <div id="box2">
-		       		<div class="upload_box">
-		      			 <input id="input-file" name="imgName2" type="file" placeholder="이미지등록" multiple/>
-		    		</div><br>
-	         		<input type="button" value="추가" onclick="add_textbox()">
-	     		</div>
-              </div>
-          </div>
         </div>
       </div>
 	    <div class="btn_group2">
