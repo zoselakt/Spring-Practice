@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.medici.arang.board.artist.command.ArtistInfoCommand;
 import com.medici.arang.board.artist.command.ArtworkCommand;
 import com.medici.arang.board.artist.command.ArtworkInfoCommand;
 import com.medici.arang.board.artist.command.FindArtistInfoCommand;
@@ -28,6 +30,7 @@ import com.medici.arang.board.artist.service.ArtistInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkServiceImpl;
 import com.medici.arang.user.command.ArtistCommand;
+import com.medici.arang.user.command.ArtistPageCommand;
 import com.medici.arang.user.service.ArtistServiceImpl;
 
 @MultipartConfig(
@@ -59,7 +62,6 @@ public class ArtworkController {
 		}
 		String loginEmail1 = (String) session.getAttribute("email");
 		ArtistCommand artist = artistservice.getArtistByEmail(loginEmail1);
-		System.out.println("여기까지 실행됨2");
 		FindArtistInfoCommand artistInfo = artistInfoService.findArtistInfo(artist.getAid());
 		model.addAttribute("artist", artistInfo);
 		model.addAttribute("artwork", new ArtworkCommand());
@@ -85,18 +87,18 @@ public class ArtworkController {
 	@ModelAttribute("artCategoryProvicerList")
 	public List<String> getArtCategoryList(){
 		List<String> list = new ArrayList<String>();
-		list.add("sculpture");
-		list.add("paint");
-		list.add("orientalPaint");
-		list.add("drawing");
-		list.add("illustration");
-		list.add("digtalArt");
-		list.add("photo");
+		list.add("Sculpture");
+		list.add("Paint");
+		list.add("OrientalPaint");
+		list.add("Drawing");
+		list.add("Illustration");
+		list.add("DigtalArt");
+		list.add("Photo");
 		
 		return list;
 	}
 	
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\PSH\\my-workSpace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
 	//	작품추가 기능
@@ -166,12 +168,15 @@ public class ArtworkController {
 		System.out.println(artworkInfo.getWorkInfoImgPath());
 		artworkService.addArtwork(artwork);
 		ArtworkCommand findArtwork = artworkService.findArtworkByImg(imgName);
-		
+
 		System.out.println(findArtwork.getWid());
 		artworkInfo.setArtworkId(findArtwork.getWid());
 		artworkInfoService.addArtworkInfo(artworkInfo);
+		model.addAttribute("artist", artist);
+		model.addAttribute("artwork", artwork);
+		model.addAttribute("artworkInfo", artworkInfo);
 		model.addAttribute("imgName", imgName);
-		return "pages/test";
+		return "pages/success_add_artwork";
 	}
 	
 	
@@ -222,8 +227,8 @@ public class ArtworkController {
 		String imgName = artwork.getArtworkImgPath();
 		System.out.println(imgName);
 		model.addAttribute("imgName", imgName);
-		
-		artwork.setArtistId(1001);
+		model.addAttribute("artwork", artwork);
+
 		artworkService.updateArtwork(artwork);
 		
 		return "pages/update_artwork";
@@ -260,11 +265,5 @@ public class ArtworkController {
 		return "pages/all_find_artwork";
 	}
 	
-	
-	
 
-	
-	
-	
-	
 }

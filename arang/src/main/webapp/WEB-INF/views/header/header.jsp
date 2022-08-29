@@ -25,15 +25,23 @@
           <ul class="center_menu">
             <li><a href="/arang/artist_board/artist_main">Artists</a></li>
             <li><a href="/arang/gallery/gallery">Gallerys</a></li>
-            <li><a href="./exhibitions/exhibitions.html">Exhibitions</a></li>
-            <li><a href="./storage/storage.html">Storage</a></li>
-            <li><a href="./notice/notice.html">Notice</a></li>
+            <li><a href="/arang/exhibitions/exhibitions_main">Exhibitions</a></li>
+            <li><a href="/arang/storage_page/storage_main">Storage</a></li>
+            <li><a href="/arang/notice/notice">Notice</a></li>
           </ul>
           <ul class="side_menu">
-            <li><a href="/arang/gallery/gallery_upload"><img src="<c:url value ='/resources/img/icon/find.png'/>" alt="find"></a></li>
-            <li><a href="/arang/mypage/mypage_artist"><img src="<c:url value ='/resources/img/icon/mypage.png'/>" alt="mypage"></a></li>
-            <li><a href="/arang/mypage/add_artist_info"><img src="<c:url value ='/resources/img/icon/like.png'/>" alt="like"></a></li>
-            <li><a href="./cart/cart.html"><img src="<c:url value ='/resources/img/icon/cart.png'/>" alt="cart"></a></li>
+            <li><a href="/arang/main"><img src="<c:url value ='/resources/img/icon/find.png'/>" alt="find"></a></li>
+            <c:if test="${artistLogin != null}">
+            	<li><a href="/arang/mypage/mypage_artist"><img src="<c:url value ='/resources/img/icon/mypage.png'/>" alt="mypage"></a></li>
+            </c:if>
+            <c:if test="${galleristLogin != null}">
+            	<li><a href="/arang/mypage/mypage_gallerist"><img src="<c:url value ='/resources/img/icon/mypage.png'/>" alt="mypage"></a></li>
+            </c:if>
+            <c:if test="${galleristLogin == null && artistLogin == null}">
+            	<li><a href="/arang/login"><img src="<c:url value ='/resources/img/icon/mypage.png'/>" alt="mypage"></a></li>
+            </c:if>
+            <li><a href="/arang/mypage/wish_list"><img src="<c:url value ='/resources/img/icon/like.png'/>" alt="like"></a></li>
+            <li><a href="/arang/mypage/mypage_gallerist"><img src="<c:url value ='/resources/img/icon/cart.png'/>" alt="cart"></a></li>
             <c:if test="${email == null}">
             	<li><a href="/arang/login">Login</a></li>
             </c:if>
@@ -45,7 +53,7 @@
       </div>
     </header>
 
-    <div class="headline_artworks">
+    <div class="headline">
       <h3>ARTISTS</h3>
       <nav id="sub-nav">
         <ul>
@@ -69,6 +77,7 @@ $('.testBtn').click(function(event) {
     	type:"post",
     	url:"<c:url value ='/clickCategory'/>",
     	contentType: 'application/json; charset:UTF-8"',
+    	dataType: "html",
     	data : JSON.stringify(
   		 	 {
   		  	<!-- 보내지는 데이터 영역 -->
@@ -82,7 +91,7 @@ $('.testBtn').click(function(event) {
     			console.log("데이터 전송 성공!!");
     			console.log(data);
     			console.log($('#artist').children().remove());
-    			location.href="/arang/" + data;
+    			location.href="/arang/artist_board/artist_main?genre=" + data;
    	 		}
    		 }
 	})

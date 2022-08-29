@@ -1,6 +1,7 @@
 package com.medici.arang.board.notice.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,18 +15,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.service.NoticeServiceImpl;
+import com.medici.arang.comment.command.CommentCommand;
+import com.medici.arang.comment.service.CommentServiceImpl;
 
 @Controller("noticeController")
 public class NoticeController {
 	private NoticeServiceImpl noticeServiceImpl;
+	private CommentServiceImpl commentServiceImpl;
 	
 	@Autowired
-	public NoticeController(NoticeServiceImpl noticeServiceImpl) {
+	public NoticeController(NoticeServiceImpl noticeServiceImpl, CommentServiceImpl commentServiceImpl) {
 		this.noticeServiceImpl = noticeServiceImpl;
+		this.commentServiceImpl = commentServiceImpl;
 	}
 	
 	@GetMapping("notice/notice")
@@ -71,15 +77,19 @@ public class NoticeController {
 	}
 	
 	@GetMapping("notice/findOneNoticeForm")
-	public String noticeOneFind(NoticeCommand noticeCommand, Model model, @RequestParam long num, HttpServletRequest request) {
+	public String noticeOneGet(NoticeCommand noticeCommand, Model model, @RequestParam long num, HttpServletRequest request) {
 		List<NoticeCommand> noticeFindOne = noticeServiceImpl.findOneNotice(num);
 		
 		request.setAttribute("noticeCommand", noticeCommand);
 		model.addAttribute("noticeFindOne", noticeFindOne);
 		return "notice/findOneNoticeForm";
 	}
+	
 	@PostMapping("notice/findOneNoticeForm")
-	public String noticeOnePost(NoticeCommand command, Model model, @RequestParam long num) {
+	public String noticeOnePost(NoticeCommand command, Model model, CommentCommand commentCommand, 
+			@RequestParam long num) {
+		commentServiceImpl.insertComment(commentCommand);
+		
 		List<NoticeCommand> noticeFindOne = noticeServiceImpl.findOneNotice(num);
 		model.addAttribute("noticeFindOne", noticeFindOne);
 		return "notice/findOneNoticeForm";

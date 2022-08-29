@@ -1,13 +1,17 @@
 package com.medici.arang.user.dao;
 
+
+
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.medici.arang.board.gallery.domain.GalleristRowMapper;
+import com.medici.arang.user.command.ArtistCommand;
 import com.medici.arang.user.command.GalleristCommend;
-import com.medici.arang.user.domain.GalleristRowMapper;
+import com.medici.arang.user.domain.GalleristVo;
 
 import lombok.NoArgsConstructor;
 
@@ -44,9 +48,22 @@ public class GalleristDao {
 		String sql = "select * from gallerist where num = ?";
 		return jdbcTemplate.queryForObject(sql, new GalleristRowMapper(), num);
 	}
+	
+	public GalleristCommend findMyGallerist(String email) {
+		String sql = "select * from Gallerist where email = ?";
+		return jdbcTemplate.queryForObject(sql, new GalleristRowMapper(), email);
+	}
+	
+	public void updateGalleristByEmail(GalleristCommend gallerist) {
+		String sql = "UPDATE Gallerist SET passwd=?, phone=?, imgPath=? WHERE email = ?";
+		
+		jdbcTemplate.update(sql, gallerist.getPasswd(), gallerist.getPhone(), 
+				gallerist.getImgPath(), gallerist.getEmail());
+	}
+	
 	//로그인 유효성 검증용
 	public boolean isValidUser(String email, String passwd) {
-		String sql = "SELECT count(*) FROM gallerist WHERE email=? AND passwd=?";
+		String sql = "SELECT count(*) FROM Gallerist WHERE email=? AND passwd=?";
 		boolean result = true;
 		int ishere = jdbcTemplate.queryForObject(sql, Integer.class, email, passwd);
 		if(ishere == 0 ) {

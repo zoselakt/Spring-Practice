@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
 /* 회원가입 (아티스트/갤러리확인) */
+.job {
+  width: 200px;
+}
+
 .container {
   padding-top: 230px;
 }
@@ -11,7 +15,7 @@
 
 #join_wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   position: relative;
 }
 
@@ -21,7 +25,6 @@
   padding: 10px 15px;
   width: 180px;
   font-size: 15px;
-  margin-top: 20px;
 }
 
 #join_wrapper .btn1:hover {
@@ -29,27 +32,31 @@
 }
 
 #artist_join {
-  width: 450px;
-  height: 455px;
-  margin-left: 200px;
+  width: 310px;
+  height: 415px;
+  margin-left: 330px;
   background: #f5f5f5;
   text-align: center;
+  box-shadow: 1px 1px 7px silver;
 }
 
 #gallerist_join {
-  width: 450px;
-  height: 455px;
-  margin-right: 200px;
+  width: 310px;
+  height: 415px;
+  margin-right: 330px;
   background: #f5f5f5;
   text-align: center;
+  box-shadow: 1px 1px 7px silver;
 }
 
 #join_wrapper .inner {
-  padding-top: 50px;
+  padding-top: 45px;
 }
 
 #join_wrapper .title {
-  margin-bottom: 20px;
-  font-size: 35px;
-  font-weight: bold;
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 12px;
+  margin-bottom: 18px;
+  font-size: 33px;
+  font-weight: normal;
 }

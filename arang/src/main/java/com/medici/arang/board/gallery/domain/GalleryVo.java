@@ -3,6 +3,7 @@ package com.medici.arang.board.gallery.domain;
 import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +25,8 @@ public class GalleryVo {
 	private String since; // 연혁
 	private String area; // 전시면적 및 층수
 	private String openClose; // 운영시간
-	private String representer; //운영대표
-	private String representerNum; //사업자등록번호
+	//private int payment; -- 대관입장료는 없고 / 협업창에서 구현하자
+	private String representer;
+	private String representerNum; 
 	private String galleryImgPath; // 갤러리 이미지 추가
-	private Timestamp regDate;
 }

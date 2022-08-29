@@ -37,17 +37,20 @@
   align-items: center;
 }
 
-.container .paintings img {
-  margin: 0 auto;
-  width: 600px;
+.paintings .inner_box {
+  display: table-cell;
+  vertical-align: middle;
 }
-
 
 .artwork_info_wrap {
   width: 580px;
   height: 660px;
   padding: 26px 0;
   position: relative;
+}
+
+.artwork_info_wrap.checkpage {
+  padding: 60px 0;
 }
 
 .artwork_info_wrap h2 {
@@ -133,7 +136,6 @@ button {
 
 .button_wrap .btn_group .btn1:hover {
   background-color: tomato;
-  font-weight: bold;
 }
 
 .button_wrap .btn_group .like {
@@ -150,6 +152,10 @@ button {
   margin-top: 11px;
   margin-left: 3px;
   font-size: 15px;
+}
+
+.button_wrap .btn_group {
+  float: left;
 }
 
 /* 상세 내용 */
@@ -200,9 +206,6 @@ button {
 
 
 /* 아트워크 */
-.product {
-  padding-bottom: 200px;
-}
 
 .product2 {
   width: 960px;
@@ -218,12 +221,6 @@ button {
   display: inline-block;
 
 }
-.item .artwork {
-  width: 250px;
-  height: 250px;
-  margin-right: 40px;
-}
-
 
 figcaption {
   color: #333;

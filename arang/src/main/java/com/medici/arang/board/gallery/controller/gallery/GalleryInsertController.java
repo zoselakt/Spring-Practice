@@ -8,22 +8,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.medici.arang.board.gallery.command.GalleryCommand;
 import com.medici.arang.board.gallery.command.GalleryInfoCommand;
+import com.medici.arang.board.gallery.domain.GalleryVo;
 import com.medici.arang.board.gallery.service.GalleryInfoServiceImpl;
+import com.medici.arang.board.gallery.service.GalleryService;
 import com.medici.arang.board.gallery.service.GalleryServiceImpl;
+import com.medici.arang.user.command.GalleristCommend;
 
 @MultipartConfig(
 		fileSizeThreshold = 1024*1024,	
@@ -40,24 +46,24 @@ public class GalleryInsertController {
 	
 	
 	@GetMapping("gallery/gallery_upload")
-	public String insertGallery(Model model, GalleryCommand galleryCommand, HttpServletRequest request) {
+	public String insertGallery(Model model, GalleryCommand galleryCommand) {
 		model.addAttribute("galleryCommand", galleryCommand);
 		return "gallery/gallery_upload";
 	}
 	
 	//이미지 저장될 경로
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\PSH\\my-workSpace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
 	@PostMapping("gallery/gallery_upload")
 	public String insertGalleryForm(GalleryCommand galleryCommand, GalleryInfoCommand infoCommand,
 					@RequestParam("imgName2") List<MultipartFile> multiFileList,
 					HttpServletRequest request, Model model) throws Exception {
-		
 		HttpSession session = request.getSession();
 		String galleristEmail = (String) session.getAttribute("email");
 		System.out.println(galleristEmail);
 		galleryCommand.setGalleristEmail(galleristEmail);
+		
 		
 		File fileCheck = new File(SAVE_DIR);
 		//해당 폴더가 없으면 생성하는거
@@ -128,6 +134,6 @@ public class GalleryInsertController {
 		infoCommand.setGalleryCode(a.getCode());
 		galleryInfoServiceImpl.insertGalleryInfo(infoCommand);
 		
-		return "redirect:gallery";
+		return "redirect:/mypage/mypage_gallerist";
 	}
 }

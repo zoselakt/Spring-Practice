@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap');
-
 /* 이달의 작가 */
 .flex-row {
   flex-direction: row !important;
@@ -94,12 +93,12 @@
 
 .container .artwork {
   width: 195px;
-  padding: 6px;
+  padding: 4px 0px 0px;
   padding-top: 0px;
 }
 
 .container .artwork.small {
-  width: 180px;
+  width: 186px;
   height: 180px;
 }
 

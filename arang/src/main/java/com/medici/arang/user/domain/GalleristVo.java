@@ -18,5 +18,4 @@ public class GalleristVo {
 	private String ssn;
 	private String phone;
 	private String imgPath;
-	private Timestamp regDate;
 }

@@ -22,13 +22,13 @@ public class NoticeDeleteController {
 	}
 	
 	@GetMapping("notice/deleteNoticeForm")
-	public String noticedeleteGet(@ModelAttribute NoticeCommand command, Model model) {
+	public String deleteGet(@ModelAttribute NoticeCommand command, Model model) {
 		model.addAttribute("command",command);
 		return "notice/deleteNoticeForm";
 	}
 	
 	@PostMapping("notice/deleteNoticeForm")
-	public String noticedeletePost(@ModelAttribute NoticeCommand command, Model model,
+	public String deletePost(@ModelAttribute NoticeCommand command, Model model,
 			HttpServletRequest request) {
 		long getLong = command.getNum(); 
 		long noticeDelete = noticeServiceImpl.deleteNotice(getLong);

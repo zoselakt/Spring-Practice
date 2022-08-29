@@ -103,13 +103,13 @@
             <td>
               <div class="check_wrap">
                 <span class="check_title">장르(중복선택가능)</span>
-                <span>조각가(Sculptor)<input class="check_btn" type="checkbox" name="selectGenre" value="sculptor"></span>
-                <span>회화가(Painter)<input class="check_btn" type="checkbox" name="selectGenre" value="painter"></span>
-                <span>동양화가(OrientalPainter)<input class="check_btn" type="checkbox" name="selectGenre" value="orientalPainter"></span>
-                <span>소묘화가(DrawingArtist)<input class="check_btn" type="checkbox" name="selectGenre" value="drawingArtist"></span>
-                <span>일러스트레이터(Illustrator)<input class="check_btn" type="checkbox" name="selectGenre" value="illustrator"></span>
-                <span>디지털아티스트(DigtalArtist)<input class="check_btn" type="checkbox" name="selectGenre" value="digtalArtist"></span>
-                <span>포토그래퍼(Photographer)<input class="check_btn" type="checkbox" name="selectGenre" value="photographer"></span>
+                <span>조각가(Sculptor)<input class="check_btn" type="checkbox" name="selectGenre" value="Sculptor"></span>
+                <span>회화가(Painter)<input class="check_btn" type="checkbox" name="selectGenre" value="Painter"></span>
+                <span>동양화가(OrientalPainter)<input class="check_btn" type="checkbox" name="selectGenre" value="OrientalPainter"></span>
+                <span>소묘화가(DrawingArtist)<input class="check_btn" type="checkbox" name="selectGenre" value="DrawingArtist"></span>
+                <span>일러스트레이터(Illustrator)<input class="check_btn" type="checkbox" name="selectGenre" value="Illustrator"></span>
+                <span>디지털아티스트(DigtalArtist)<input class="check_btn" type="checkbox" name="selectGenre" value="DigtalArtist"></span>
+                <span>포토그래퍼(Photographer)<input class="check_btn" type="checkbox" name="selectGenre" value="Photographer"></span>
               </div>
             </td>
           </tr>

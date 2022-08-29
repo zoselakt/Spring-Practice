@@ -14,9 +14,9 @@
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/artwork_upload.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/mypage/gallery_upload.css">
 </head>
-<script type="text/javascript">
-	function gomain() { location.href="gallery"};
-</script>
+<style>
+  .ck-editor__editable { height: 300px; width: 815px; }
+</style>
 <script>
 cnt = 0;
 const add_textbox = () => {
@@ -48,7 +48,7 @@ const remove = (obj) => {
     </div>
 
     <!-- 갤러리상세페이지 -->
-    <form:form method="post" enctype="multipart/form-data">
+    <form action="gallery_upload" method="post" enctype="multipart/form-data">
     <div id="artist">
       <div id="artist_detail">
         <div class="container">
@@ -68,15 +68,16 @@ const remove = (obj) => {
             </div>
             <div class="content_block">
               <div class="review">
-                <h2>ARARIO GALLERY</h2>
-                <p><textarea class="textarea_box" placeholder="갤러리 소개" cols="43" rows="7" name="description"></textarea></p>
+                <p><textarea id="editor" class="textarea_box" placeholder="갤러리 소개" cols="43" rows="7" name="description"></textarea></p>
                 <p><br></p>
+                <p>
                 <div id="box2">
               	<input type="button" value="추가" onclick="add_textbox()">
               		<div class="upload_box">
          		  		 <input type="file" id="input-file" name="imgName2" multiple>
               		</div>
         		</div>
+                </p>
               </div>
               <div class="product">
                 <h4 class="sub_title">Gallery Infomation</h4>
@@ -110,10 +111,16 @@ const remove = (obj) => {
                           <div class="info_block">
                             <div class="first">전화번호(Phone)</div>
                             <input type="text" placeholder="전화번호" name="galleryPhone">
+                           </div>
                             <br>
-                            <input type="text" placeholder="갤러리스트네임" name="representer">
+                           <div class="info_block">
+                            <div class="first">사업주명</div>
+                            <input type="text" placeholder="사업자명" name="representer">
+                           </div>
                             <br>
-                            <input type="text" placeholder="갤러리스트넘버" name="representerNum">
+                           <div class="info_block">
+                            <div class="first">사업자등록번호</div>
+                            <input type="text" placeholder="사업자등록번호(ex)123-45-67890)" name="representerNum">
                           </div>
                         </div>
                       </div>
@@ -122,34 +129,19 @@ const remove = (obj) => {
                 </div>
               </div>
             </div>
-            <div class="side_block">
-              <div class="a_list">
-                <h3>추천작가</h3>
-                <ul>
-                  <li>
-                    <a href="#">신수희</a>
-                  </li>
-                  <li>
-                    <a href="#">최선호</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="a_banner">
-                <h3>이달의 전시</h3>
-                <a href="#"><img class="exhibition_banner" src="/fake_resources/img/김선배너.jpg" alt="exhibition_banner"></a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-	    <div class="btn_group2">
-	      <button type="submit">등록</button> 
-		  <input type="reset" value="초기화">
-	      <input type="button" onclick="gomain()" value="목록으로">
-	    </div>
+    <div class="btn_group2">
+      <input type="submit" class="btn2" value="완료">
     </div>
-    </form:form>
+    </div>
+    </form>
   </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+<script>
+	ClassicEditor.create( document.querySelector( '#editor' ) );
+</script>
 </body>
 
 </html>

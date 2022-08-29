@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,11 +59,11 @@ public class GalleristInsertController {
 		}
 	
 	//이미지 저장될 경로
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\PSH\\my-workSpace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
 
-	//갤러리 게시판 등록 + 이미지 처리
+
 	@PostMapping("gallery/join_gallerist")
 	public String insertGalleryForm(@ModelAttribute("galleristCommend")
 			GalleristCommend galleristCommend, HttpServletRequest request,
@@ -130,12 +133,33 @@ public class GalleristInsertController {
 		
 		System.out.println(galleristCommend.getEmail());
 		System.out.println(galleristCommend.getImgPath());
+		
+		List<String> errorMsgs = new ArrayList<>();
+		if(galleristCommend.getEmail() == null || galleristCommend.getEmail().length() == 0) {
+			errorMsgs.add("이메일은 필수입력 정보입니다.");
+		}if(galleristCommend.getPasswd() == null || galleristCommend.getPasswd().length() == 0) {
+			errorMsgs.add("비밀번호는 필수입력 정보입니다.");
+		}if(galleristCommend.getName() == null || galleristCommend.getName().length() == 0) {
+			errorMsgs.add("이름은 필수입력 정보입니다.");
+		}if(galleristCommend.getSsn() == null || galleristCommend.getSsn().length() == 0) {
+			errorMsgs.add("주민등록번호는 필수입력 정보입니다.");
+		}if(galleristCommend.getPhone() == null || galleristCommend.getPhone().length() == 0) {
+			errorMsgs.add("전화번호는 필수입력 정보입니다.");	
+		}if(galleristCommend.getPhone() == null || galleristCommend.getPhone().length() == 0) {
+			errorMsgs.add("전화번호는 필수입력 정보입니다.");	
+		}if(galleristCommend.getPhone() == null || galleristCommend.getPhone().length() == 0) {
+			errorMsgs.add("전화번호는 필수입력 정보입니다.");	
+		if(errorMsgs.size() > 0) {
+			model.addAttribute("msg", errorMsgs);
+			model.addAttribute("url", "add_artist");
+			return "alert";
+			}
+		}	
+		
+		
 		galleristServiceImpl.insertGallerist(galleristCommend);
 		
-//		RequestDispatcher rd = request.getRequestDispatcher("add_success");
-//		rd.forward(request, response);
-		
-		return "user/add_success";
+		return "redirect:/login";
 	}
 	
 	

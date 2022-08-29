@@ -2,6 +2,8 @@ package com.medici.arang.board.artist.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,6 +34,8 @@ import com.medici.arang.board.artist.command.CategoryCommand;
 import com.medici.arang.board.artist.command.FindArtistInfoCommand;
 import com.medici.arang.board.artist.service.ArtistInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkServiceImpl;
+import com.medici.arang.like.domain.LikeVo;
+import com.medici.arang.like.service.LikeServiceImpl;
 import com.medici.arang.user.command.ArtistCommand;
 import com.medici.arang.user.command.ArtistPageCommand;
 import com.medici.arang.user.service.ArtistServiceImpl;
@@ -51,6 +55,9 @@ public class ArtistInfoController {
 	
 	@Autowired
 	public ArtworkServiceImpl artworkService;
+	
+	@Autowired
+	LikeServiceImpl likeService;
 	
 	//	작품추가 페이지FORM
 	@GetMapping("/mypage/add_artist_info")
@@ -84,7 +91,7 @@ public class ArtistInfoController {
 	
 	
 	
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\PSH\\my-workSpace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
 	//	작품추가 기능
@@ -132,9 +139,17 @@ public class ArtistInfoController {
 		artistInfo.setArtistId(artist.getAid());
 		model.addAttribute("artistInfo", artistInfo);
 		artistInfoService.addArtistInfo(artistInfo);
-		return "mypage/success_info";
+		
+		request.setAttribute("artist", artist);
+		
+		return "mypage/artist_checkpage";
 	}
 	
+	
+	@GetMapping("/mypage/artist_checkpage")
+	public String artistCheckpage(HttpServletRequest request) {
+		return "mypage/artist_checkpage";
+	}
 	
 	
 	@GetMapping("/artist_board/artist_depth")
@@ -142,7 +157,17 @@ public class ArtistInfoController {
 		FindArtistInfoCommand artistInfo = artistInfoService.findArtistInfo(id);
 		List<ArtworkCommand> artworkList = artworkService.allfindArtwork(id);
 		
+		///작가id aid로 찾기
+		LikeVo findLike = likeService.findLikeByTargetId(id);
+
+		if(findLike != null) {
+			model.addAttribute("likeNum", 2);
+		}else {
+			model.addAttribute("likeNum", 3);		
+		}
 		
+		//아티스트 PK ID
+		model.addAttribute("id", id);
 		model.addAttribute("artistInfo", artistInfo);
 		model.addAttribute("artworkList", artworkList);
 		return "artist_board/artist_depth";
@@ -160,7 +185,7 @@ public class ArtistInfoController {
 			page = Integer.parseInt(request.getParameter("page"));			
 		}
 		//페이징
-		Pageable pageable = PageRequest.of(page, 3, Sort.Direction.DESC, "aid");
+		Pageable pageable = PageRequest.of(page, 9, Sort.Direction.DESC, "aid");
 		Page<ArtistPageCommand> artistPagingList = artistservice.findAllPage(pageable);
 		
 		// ajax, 컨트롤러 처리 해야함
@@ -195,6 +220,52 @@ public class ArtistInfoController {
 		return "artist_board/artist_main";
 	}
 	
+	@GetMapping("/artist_board/artist_main_ctg")
+	public String findArtistCtgForm(Model model, @RequestParam("genre") String genre,
+							HttpServletRequest request) {
+		//page 요청 검사
+		int page = 0;
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));			
+		}
+		//페이징
+		Pageable pageable = PageRequest.of(page, 9, Sort.Direction.DESC, "aid");
+		Page<ArtistPageCommand> artistPagingList = 
+				artistservice.findAllPageByGenre(pageable, genre);
+		
+		// ajax, 컨트롤러 처리 해야함
+		
+		//현재페이지
+		int pageNumber = artistPagingList.getPageable().getPageNumber();
+		//총 페이지수
+		int totalPages = artistPagingList.getTotalPages();
+		//블럭의 수
+		int pageBlock = 5;
+		//현재 페이지가 7이라면 1*5+1=6
+		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1;
+		//6+5-1=10. 6,7,8,9,10해서 10.
+		int endBlockPage = startBlockPage+pageBlock-1;
+		endBlockPage= totalPages<endBlockPage? totalPages:endBlockPage;
+		
+		
+		List<ArtworkCommand> arkworkList = artworkService.allFindArtwork();
+		List<ArtistPageCommand> artworkPageList = artistservice.findAllArtistkByEmail();
+		List<FindArtistInfoCommand> artistList1 = artistInfoService.findArtist();
+		long artistCount = artistInfoService.getArtistCount();
+		
+		model.addAttribute("artistList1", artistList1);
+		model.addAttribute("artworkList", arkworkList);
+		model.addAttribute("artworkPageList", artworkPageList);
+		model.addAttribute("artistCount", artistCount);
+		
+		//페이징 영역
+		model.addAttribute("startBlockPage", startBlockPage);
+		model.addAttribute("endBlockPage", endBlockPage);
+		model.addAttribute("artistPagingList", artistPagingList);
+		return "artist_board/artist_main_ctg";
+	}
+	
+	
 	@ResponseBody
 //	@PostMapping("/clickCategory")
 	@RequestMapping(value = "/clickCategory", produces = "application/text; charset=utf8")
@@ -207,39 +278,9 @@ public class ArtistInfoController {
 		System.out.println(ctg.getCategoryValue());
 		String ctgValue = ctg.getCategoryValue();
 		//page 요청 검사
-		int page = 0;
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));			
-		}
-		//페이징
-		Pageable pageable = PageRequest.of(page, 1, Sort.Direction.DESC, "aid");
-		Page<ArtistPageCommand> genrePagingList = 
-				artistservice.findPageByGenre(pageable, ctgValue);
-		
-		//현재페이지
-		int pageNumber = genrePagingList.getPageable().getPageNumber();
-		//총 페이지수
-		int totalPages = genrePagingList.getTotalPages();
-		//블럭의 수
-		int pageBlock = 5;
-		//현재 페이지가 7이라면 1*5+1=6
-		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1;
-		//6+5-1=10. 6,7,8,9,10해서 10.
-		int endBlockPage = startBlockPage+pageBlock-1;
-		endBlockPage= totalPages<endBlockPage? totalPages:endBlockPage;
-		
-		//페이징 영역
-		model.addAttribute("startBlockPage", startBlockPage);
-		model.addAttribute("endBlockPage", endBlockPage);
-		model.addAttribute("genrePagingList", genrePagingList);
 		
 		
-		List<ArtistPageCommand> artworkPageList = 
-				artistservice.findAllArtistkByGenre(ctgValue);
-		
-		model.addAttribute("artworkPageList", artworkPageList);
-		
-		return "artist_board/artist_main_ctg";
+		return ctgValue;
 	}
 	
 	

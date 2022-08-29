@@ -10,12 +10,9 @@ import com.medici.arang.board.notice.command.NoticeCommand;
 import com.medici.arang.board.notice.dao.NoticeDao;
 
 public class NoticeServiceImpl implements NoticeService{
-	NoticeDao dao = new NoticeDao();
 	
 	@Autowired
-	public NoticeServiceImpl(NoticeDao dao) {
-		this.dao = dao;
-	}
+	NoticeDao dao;
 	
 	@Override
 	public long insertNotice(NoticeCommand command) {

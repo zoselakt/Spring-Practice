@@ -27,6 +27,9 @@ const remove = (obj) => {
     cnt--;
 }
 </script>
+<style>
+  .ck-editor__editable { height: 220px; }
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -87,15 +90,9 @@ const remove = (obj) => {
                     <div class="info_block2">
                       <div class="first">설명(Description)</div>
                       <div class="last">
-                        <form:textarea path="description"  placeholder="작품설명 300자 이내" cols="43" rows="7"/>
+                        <form:textarea id="editor" path="description"  placeholder="작품설명 300자 이내" cols="43" rows="7"/>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="button_wrap">
-                  <div class="btn_group">
-                    <button class="btn1">Contacting</button>
-                    <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
                   </div>
                 </div>
               </div>
@@ -126,43 +123,23 @@ const remove = (obj) => {
               <p class="born">1984</p>
               <p class="txt">${artist.description}</p>
             </div>
-            <!-- <div class="product">
-              <h4 class="sub_title">This artist's work</h4>
-              <div id="product2" class="item_list1">
-                <div class="slick_list">
-                  <div class="slick_trak">
-                    <div class="item">
-                        <div class="artwork_wrap">
-                          <a href="#"><img class="artwork" src="../resources/img/윤라희/윤라희-오브제2_s01_fub8Yrj.jpg" alt="오브제2"></a>
-                        </div>
-                      <figcaption>
-                        <h5>BLOCK (Falling Bluse Brown)</h5>
-                        <p>Limited Unique</p>
-                      </figcaption>
-                    </div>
-                    <div class="item">
-                        <div class="artwork_wrap">
-                          <a href="#"><img class="artwork" src="../resources/img/윤라희/윤라희-오브제3_s01_gpLUosS.jpg" alt="오브제3"></a>
-                        </div>
-                      <figcaption>
-                        <h5>BLOCK (Falling Bluse Brown)</h5>
-                        <p>Limited Unique</p>
-                      </figcaption>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </section>
+      <div class="btn_group2">
+        <button class="btn2" type="submit">완료</button>
+      <a href="/arang/mypage/mypage_artist">
+        <button class="btn2" type="button">취소</button>
+      </a>
+      </div>
+    </div>
         </div>
       </div>
 
-    </div>
-      <div class="btn_group2">
-        <button class="btn2" type="submit">완료</button>
-      </div>
 
 </form:form>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor.create( document.querySelector( '#editor' ) );
+</script>
 </body>
 </html>

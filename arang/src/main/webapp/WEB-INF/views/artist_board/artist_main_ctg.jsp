@@ -22,50 +22,9 @@
 <div id="wrap">
   <jsp:include page="/WEB-INF/views/header/header.jsp"/>
   	<button href="#" class="testBtn">테스트버튼</button>
-    <!-- 이달의 작가 -->
     <div id="artist">
       <form id="artist_form">
         <div class="container">
-          <div class="sub_page_top">
-            <h5 class="sub_title">Artist of the month</h5>
-            <div class="row">
-            
-            
-            <c:forEach var="artistL" items="${artistList1}" begin="0" end="1">
-            <div class="col_wrap"> 
-  			<div class="col col-1 swiper mySwiper">
-                <div class="artist_info d-flex flex-row">
-                  <div class="artist_avatar">
-                    <a href="/arang/artist_board/artist_depth?id=${artistL.aid}"><img src="${artistL.imgPath}" ></a>
-                  </div>
-                  <div class="artist_text">
-                    <div class="first">
-                      <span>${artistL.name_kor}</span>
-                      <span class="futuraM">${artistL.name_eng}</span>
-                      <span class="genre_tag">${artistL.genre}</span>
-                    </div>
-                    <div class="second d-flex flex-row">
-                      <div>${artistL.title}</div>
-                      <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="row artwork_wrap swiper-wrapper">
-  				<c:forEach var="artworkL" items="${artworkList}">
-  				<c:if test="${artistL.aid == artworkL.artistId}">
-                  <div class="col swiper-slide">
-                    <a href="/arang/artwork_board/artwork_info?id=${artistL.aid}&wid=${artworkL.wid}"><img class="artwork small" src="${artworkL.artworkImgPath}"></a>
-                  </div>
-  				</c:if>
-  				</c:forEach>
-                </div>
-              	</div>
-              
-              </div>
-  			</c:forEach>
-             
-            </div>
-          </div>
           <!-- 아티스트 -->
           <div class="sub_page_context">
             <div class="grid_wrapper">
@@ -81,7 +40,9 @@
                     <div class="artist_text">
                       <div class="first">
                         <span>${artworkPage.name_kor}</span>
-                        <span class="genre_tag">${artworkPage.genre}</span>
+                        <c:forTokens var="genre" items="${artworkPage.genre}" delims=";">
+                        <span class="genre_tag">${genre}</span>
+                        </c:forTokens>
                       </div>
                       <div class="second d-flex flex-row">
                         <div>날 것 그대로의 본질에 우연적 효과를 불어넣다.</div>
@@ -103,16 +64,16 @@
       <ul class="pagination">
          <!-- 시작 -->
          <c:choose>
-            <c:when test="${genrePagingList.first}"></c:when>
+            <c:when test="${artistPagingList.first}"></c:when>
             <c:otherwise>
                <li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=0'/>">처음</a></li>
-					<li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${genrePagingList.number-1}'/>">&larr;</a></li>
+					<li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${artistPagingList.number-1}'/>">&larr;</a></li>
             </c:otherwise>
          </c:choose>
          <!-- 페이지 그룹 -->
          <c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
             <c:choose>
-               <c:when test="${genrePagingList.pageable.pageNumber+1 == i}">
+               <c:when test="${artistPagingList.pageable.pageNumber+1 == i}">
                   <li class="page_item disabled"><a class="page_link pick_num" href="<c:url value='/artist_board/artist_main?page=${i-1}'/>">${i}</a></li>
                </c:when>
                <c:otherwise>
@@ -122,10 +83,10 @@
          </c:forEach>
          <!-- 끝 -->
          <c:choose>
-            <c:when test="${genrePagingList.last}"></c:when>
+            <c:when test="${artistPagingList.last}"></c:when>
             <c:otherwise>
-               <li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${genrePagingList.number+1}'/>">&rarr;</a></li>
-					<li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${genrePagingList.totalPages-1}'/>">마지막</a></li>
+               <li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${artistPagingList.number+1}'/>">&rarr;</a></li>
+					<li class="page_item"><a class="page_link" href="<c:url value='/artist_board/artist_main?page=${artistPagingList.totalPages-1}'/>">마지막</a></li>
             </c:otherwise>
          </c:choose>
       </ul>

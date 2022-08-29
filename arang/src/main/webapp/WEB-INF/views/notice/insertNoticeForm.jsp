@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/artist/artist_focus.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_CreateUpdate.css">
 <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
@@ -30,49 +31,44 @@ const remove = (obj) => {
     cnt--;
 }
 </script>
-
+<style>
+  .ck-editor__editable { height: 300px; width: 881px; }
+</style>
 </head>
 <body>
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
   
   <div id="wrap">
-   <div class="headline_artworks">
-     <h3>NOTICE RESIST</h3>
-   </div>
 <form:form method="post" modelAttribute="noticeCommand" enctype="multipart/form-data">
     <div id="notice">
       <div id="notice_detail">
-        <div class="container">
-          <div class="detail_wrapper d-flex">
-            <div class="side_block">
-              <div class="notice_info">
-                <div class="input_box_left">
-                  <h2>제목</h2>
-				  <form:input path="title" class="title" type="text" size="100" maxlength="100"/>
-                  <input type="hidden" value="${noticeCommand.writer}">
-                </div>
+        <div class="container notice">
+          <div class="detail_wrapper notice d-flex">
+            <div class="content_block">
+            <div class="headline">
+   				<h3>Writing</h3>
+  			</div>
+              <div class="review">
+                <p class="sub_txt title">제목</p>
+                <form:input path="title" class="title" type="text" size="100" maxlength="100" />
+                <input type="hidden" value="${noticeCommand.writer}">
+                <p class="sub_txt inner">내용</p>
+                <form:textarea id="editor" path="content" class="content" cols="100" rows="100" />
               </div>
             </div>
-            <div class="side_block">
-              <div class="notice_info">
-                <div class="input_box_left">
-                  <h2>내용</h2>
-				  <form:textarea path="content" class="content" cols="100" rows="100"></form:textarea>
-                </div>
-              </div>
-            </div>
+          </div>
+          <div class="btn_group2">
+            <button type="submit" class="btn2">등록</button>
+            <button type="button" onclick="gomain()" class="btn2">취소</button>
+          </div>
         </div>
       </div>
-	    <div class="btn_group2">
-	      <button type="submit">등록</button> 
-		  <input type="reset" value="초기화">
-	      <input type="button" onclick="gomain()" value="목록으로">
-	    </div>
-   	 </div>
     </div>
     </form:form>
     </div>
-    <script type="text/javascript" src="/fake_resources/js/ckeditor.js"></script>
-    
+<script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor.create( document.querySelector( '#editor' ) );
+</script> 
 </body>
 </html>

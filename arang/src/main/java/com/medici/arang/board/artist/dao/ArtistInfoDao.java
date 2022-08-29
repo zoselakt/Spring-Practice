@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -34,8 +35,8 @@ public class ArtistInfoDao {
 		String sql = "SELECT a.name_kor, a.name_eng, a.ssn, a.imgPath, a.genre, b.title, "
 				+ "b.infoImgPath, b.description, a.aid FROM ArtistInfo b LEFT JOIN Artist a "
 				+ "ON a.aid = b.artistId WHERE a.aid = ?";
+		try {
 		return jdbcTemplate.queryForObject(sql, new RowMapper<FindArtistInfoCommand>() {
-			
 			public FindArtistInfoCommand mapRow(ResultSet rs, int rowNum) throws SQLException {
 				FindArtistInfoCommand artistInfo = new FindArtistInfoCommand(rs.getString("name_kor"),
 						rs.getString("name_eng"), rs.getString("ssn"), 
@@ -45,6 +46,9 @@ public class ArtistInfoDao {
 				return artistInfo;
 			}
 		}, id);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 	
 	public List<FindArtistInfoCommand> findArtist() {

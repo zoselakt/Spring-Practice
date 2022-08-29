@@ -19,7 +19,7 @@
         <div id="join_wrapper">
           <div id="artist_join">
             <div class="inner">
-              <img src="/fake_resources/img/icon/artist_join.png" alt="artist_join">
+              <img class="job" src="/fake_resources/img/icon/artist_join2.png" alt="artist_join">
               <p class="title">I'm an Artist</p>
               <div class="btn_group">
                 <a href="/arang/user/add_artist"><button class="btn1">아티스트 가입</button></a>
@@ -28,7 +28,7 @@
           </div>
           <div id="gallerist_join">
             <div class="inner">
-              <img src="<c:url value ='/resources/img/icon/gallerist_join.png'/>" alt="gallerist_join">
+              <img class="job" src="<c:url value ='/resources/img/icon/gallerist_join2.png'/>" alt="gallerist_join">
               <p class="title">I'm a Gallerist</p>
               <div class="btn_group">
                 <a href="/arang/gallery/join_gallerist"><button class="btn1">갤러리스트 가입</button></a>

@@ -37,7 +37,7 @@
         </div>
         <div class="btn_other">
           <p>아직 회원이 아니신가요?&nbsp;&nbsp;</p>
-          <a href="/arang/user/select_user_type"><strong>회원가입</strong></a>
+          <a href="/arang/user/select_user_type"><strong>회원가입<strong></a>
         </div>
       </form>
     </div>

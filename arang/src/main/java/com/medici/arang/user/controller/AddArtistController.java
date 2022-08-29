@@ -36,7 +36,7 @@ public class AddArtistController {
 	}
 	
 	//이미지 저장될 경로
-	private static final String SAVE_DIR = "C:\\JavaYoung\\JavaStudy\\eclipse-workspace\\arang\\src\\main\\webapp\\resources\\img\\";
+	private static final String SAVE_DIR = "C:\\PSH\\my-workSpace\\arang\\src\\main\\webapp\\resources\\img\\";
 	private static final String PATH_DIR = "/upload_img/";
 	
 	//유저 회원가입 처리 + 이미지 처리
@@ -44,7 +44,7 @@ public class AddArtistController {
 	public String addArtist(@ModelAttribute("artistCommand")
 			ArtistCommand artistCommand, Model model,
 			HttpServletRequest request, @RequestParam("imgFile") MultipartFile file) {
-//		HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 		
 		String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드
 		long size = file.getSize(); //파일 사이즈
@@ -93,7 +93,6 @@ public class AddArtistController {
 		
 		artistCommand.setImgPath(PATH_DIR + "artist/" + forderName + "/" + uniqueName+fileExtension);
 		String imgName = artistCommand.getImgPath();
-		System.out.println(imgName);
 				
 		String email = artistCommand.getEmail1()+"@"+artistCommand.getEmail2();
 		artistCommand.setEmail(email);
@@ -101,11 +100,20 @@ public class AddArtistController {
 		
 		String[] genreList = request.getParameterValues("selectGenre");
 		String resultGenre = "";
-		for (String genre : genreList) {
-			resultGenre += genre;
-			resultGenre += ";";
-			artistCommand.setGenre(resultGenre);
+		if ( genreList.length > 1 ) {
+			for (String genre : genreList) {
+				resultGenre += genre;
+				resultGenre += ";";
+				artistCommand.setGenre(resultGenre);
+			}
+			
+		}else if ( genreList.length == 1 ) {
+			for (String genre : genreList) {
+				resultGenre += genre;
+				artistCommand.setGenre(resultGenre);
+			}
 		}
+		
 		System.out.println(artistCommand.getGenre());
 		
 		
@@ -121,13 +129,32 @@ public class AddArtistController {
 		
 		System.out.println(artistCommand.getCareer());
 		
+		List<String> errorMsgs = new ArrayList<>();
+		if(artistCommand.getEmail() == null || artistCommand.getEmail().length() == 0) {
+			errorMsgs.add("이메일은 필수입력 정보입니다.");
+		}if(artistCommand.getPasswd() == null || artistCommand.getPasswd().length() == 0) {
+			errorMsgs.add("비밀번호는 필수입력 정보입니다.");
+		}if(artistCommand.getName_kor() == null || artistCommand.getName_kor().length() == 0) {
+			errorMsgs.add("이름은 필수입력 정보입니다.");
+		}if(artistCommand.getName_eng() == null || artistCommand.getName_eng().length() == 0) {
+			errorMsgs.add("이름은 필수입력 정보입니다.");
+		}if(artistCommand.getSsn() == null || artistCommand.getSsn().length() == 0) {
+			errorMsgs.add("주민등록번호는 필수입력 정보입니다.");
+		}if(artistCommand.getPhone() == null || artistCommand.getPhone().length() == 0) {
+			errorMsgs.add("전화번호는 필수입력 정보입니다.");	
+		}if(artistCommand.getGenre() == null || artistCommand.getGenre().length() == 0) {
+			errorMsgs.add("1개 이상의 장르를 선택해주세요.");
+		}
+		
+		if(errorMsgs.size() > 0) {
+			model.addAttribute("msg", errorMsgs);
+			model.addAttribute("url", "add_artist");
+			return "alert";
+			}
+
 		model.addAttribute("imgName", imgName);
 		artistService.addArtist(artistCommand);
-		
-		//세션 담기
-//		session.setAttribute("email", artistCommand.getEmail());
-		
-		return "user/add_success";
+		return "redirect:/login";
 	}
 	
 	//회원가입폼 이메일 데이터 제공

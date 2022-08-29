@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/storage/storage_list.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_All.css">
   
   <script>
@@ -26,8 +27,8 @@
   <br><br><br><br><br><br><br><br>
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
   
-    <div class="board_wrapper">
-      <h3 class="sub_title">My Storage</h3>
+    <div class="board_wrapper notice">
+      <h3 class="sub_title">Notice</h3>
       <div>
 		<form action="<c:url value='/notice/notice'/>" method="GET" name="search-form">
           <fieldset>
@@ -39,8 +40,8 @@
 						<option value="writer">글쓴이</option>
 					</select>
 					<input type="text" name="word" style="margin: 10px;"> 
-					<input type="submit" value="검색">
-              <a href="insertNoticeForm"><button class="board_btn service"  type="button">공지작성</button></a>
+					<input class="search" type="submit" value="검색">
+              <a href="insertNoticeForm"><button class="board_btn service write"  type="button">글쓰기</button></a>
             </div>
           </fieldset>
         </form>
@@ -48,25 +49,21 @@
       
       <form:form method="post">
       <table id="selectAll" class="storage_list artist">
-      <thead class="theader">
         <tr class="selectr">
           <td class="selectd">No.</td>
-          <td class="selectd">제목</td>
           <td class="selectd">작성자</td>
-          <td class="selectd">조회수</td>
+          <td class="selectd">제목</td>
+          <td class="selectd">조회</td>
           <td class="selectd">작성일</td>
         </tr>
-      </thead>
         <tbody class="tbodies">
         <c:forEach var="notice" items="${noticeList.content}">
 	        <tr class="bodytr">
 	          <td class="bodytd">${notice.num}</td>
-	          <td class="bodytd"><a href="./findOneNoticeForm?num=${notice.num}">${notice.title}</a></td>
 	          <td class="bodytd">${notice.writer}</td>
+	          <td class="bodytd"><a href="./findOneNoticeForm?num=${notice.num}">${notice.title}</a></td>
 	          <td class="bodytd">${notice.readCnt}</td>
 	          <td class="bodytd">${notice.regDate}</td>
-	          <td class="bodytd"><a href="./updateNoticeForm?num=${notice.num}">수정</a></td>
-			  <td class="bodytd"><a href="./deleteNoticeForm?num=${notice.num}">삭제</a></td>
 	        </tr>
         </c:forEach>
 	    </tbody>

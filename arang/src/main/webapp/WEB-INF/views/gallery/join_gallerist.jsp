@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-  <title>아티스트가입</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>아티스트가입</title>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/login/input_style.css"/>

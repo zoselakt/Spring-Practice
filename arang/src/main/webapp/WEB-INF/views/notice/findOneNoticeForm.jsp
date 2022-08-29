@@ -9,6 +9,9 @@
 <title>Insert title here</title>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/storage/storage_list.css">
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/artist/artist_focus.css"/>
+  <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_CreateUpdate.css">
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/notice/notice_one.css">
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
 <script type="text/javascript">
@@ -22,40 +25,35 @@
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
   
   <div id="wrap">
-	
 	<form:form method="post">
-            <table class="table_a">
-                <c:forEach var="findOne" items="${noticeFindOne}">
-                <tr class="textr">
-                    <td class="textd">번호</td>
-                    <td class="inner-textd">${findOne.num}</td>
-                    <td class="textd">작성일</td>
-                    <td class="inner-textd">${findOne.regDate}</td>
-                    <td class="textd">작성자</td>
-                    <td class="inner-textd">${findOne.writer}</td>
-                    <td class="textd">조회수</td>
-                    <td class="inner-textd">${findOne.readCnt}</td>
-                </tr>
-                <tr class="textr">
-                	<td class="title">제목</td>
-                </tr>
-                <tr>
-                	<td class="inner-title">${findOne.title}</td>                
-                </tr>
-                <tr class="textr">
-                	<td class="content">내용</td>
-                </tr>
-                <tr>
-                	<td class="inner-content">${findOne.content}</td>
-                </tr>
-                </c:forEach>
-            </table>
-            <div class="button-group">
-                <input type="button" onclick="gomain()" value="목록으로">
-                <input type="button" onclick="goupdate()" value="수정">
-                <input type="button" onclick="godelete()" value="삭제">
-            </div>
-    </form:form>
+      <div class="board_wrapper">
+      <div>
+        <c:forEach var="findOne" items="${noticeFindOne}">
+      <table class="storage_list artist">
+          <tr>
+            <td class="findOne_td"><strong>No.</strong> ${findOne.num}</td>
+            <td class="findOne_td"><strong>작성자</strong> ${findOne.writer}</td>
+            <td class="findOne_td"><strong>조회</strong> ${findOne.readCnt}</td>
+            <td class="findOne_td"><strong>작성일</strong> ${findOne.regDate}</td>
+          </tr>
+      </table>
+      <div class="review">
+        <p class="sub_txt inner">제목</p>
+        <div class="findOne_title">${findOne.title}</div>
+        <input type="hidden" value="${noticeCommand.writer}">
+        <p class="sub_txt inner">내용</p>
+        <div class="findOne_title">${findOne.content}</div>
+        <p><br></p>
+      </div>
+      </c:forEach>
+      <div class="btn_group2">
+        <button type="button" onclick="goupdate()" class="btn2">수정</button>
+        <button type="button" onclick="godelete()" class="btn2">삭제</button>
+        <button type="button" onclick="gomain()" class="btn2">목록보기</button>
+      </div>
+	  </div>
     </div>
+    </form:form>
+ </div>
 </body>
 </html>

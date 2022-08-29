@@ -13,18 +13,26 @@ import com.medici.arang.board.artist.dao.ArtworkInfoDao;
 import com.medici.arang.board.artist.service.ArtistInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkInfoServiceImpl;
 import com.medici.arang.board.artist.service.ArtworkServiceImpl;
+import com.medici.arang.board.contact.dao.ContactDao;
+import com.medici.arang.board.contact.service.ContactServiceImpl;
+import com.medici.arang.board.exhibitions.dao.ExhibitionDao;
+import com.medici.arang.board.exhibitions.service.ExhibitionServiceImpl;
 import com.medici.arang.board.gallery.dao.GalleryDao;
 import com.medici.arang.board.gallery.dao.GalleryInfoDao;
 import com.medici.arang.board.gallery.service.GalleryInfoServiceImpl;
 import com.medici.arang.board.gallery.service.GalleryServiceImpl;
 import com.medici.arang.board.notice.dao.NoticeDao;
 import com.medici.arang.board.notice.service.NoticeServiceImpl;
+import com.medici.arang.comment.dao.CommentDao;
+import com.medici.arang.comment.service.CommentServiceImpl;
+import com.medici.arang.like.dao.LikeDao;
+import com.medici.arang.like.service.LikeServiceImpl;
+import com.medici.arang.storage.dao.StorageDao;
+import com.medici.arang.storage.service.StorageServiceImpl;
 import com.medici.arang.user.dao.ArtistDao;
 import com.medici.arang.user.dao.GalleristDao;
 import com.medici.arang.user.service.ArtistServiceImpl;
 import com.medici.arang.user.service.GalleristServiceImpl;
-
-
 
 @Configuration
 public class DataSourceConfig {
@@ -123,13 +131,64 @@ public class DataSourceConfig {
 	public GalleryInfoServiceImpl galleryInfoServiceImpl() {
 		return new GalleryInfoServiceImpl();
 	}
+	
+	@Bean
+	public ContactDao contactDao() {
+		return new ContactDao(dataSource());
+	}
+	
+	@Bean
+	public ContactServiceImpl contactServiceImpl() {
+		return new ContactServiceImpl();
+	}
+	
+	@Bean
+	public ExhibitionDao exhibitionDao() {
+		return new ExhibitionDao(dataSource());
+	}
+	
+	@Bean
+	public ExhibitionServiceImpl exhibitionServiceImpl() {
+		return new ExhibitionServiceImpl();
+	}
+	
+	
+	@Bean
+	public StorageDao storageDao() {
+	   return new StorageDao(dataSource());
+	}
+	   
+	@Bean
+	public StorageServiceImpl storageServiceImpl() {
+	   return new StorageServiceImpl();
+	}
+	
+	
+	@Bean
+	public LikeDao likeDao() {
+	   return new LikeDao(dataSource());
+	}
+	   
+	@Bean
+	public LikeServiceImpl likeService() {
+	   return new LikeServiceImpl();
+	}
+	
 	@Bean
 	public NoticeDao noticeDao() {
-		return new NoticeDao(dataSource());
+	   return new NoticeDao(dataSource());
+	}
+	
+	@Bean
+	public NoticeServiceImpl noticeService() {
+	   return new NoticeServiceImpl();
 	}
 	@Bean
-	public NoticeServiceImpl noticeServiceImpl() {
-		return new NoticeServiceImpl(noticeDao());
+	public CommentDao commentDao() {
+		return new CommentDao(dataSource());
 	}
-
+	@Bean
+	public CommentServiceImpl commentServiceImpl() {
+		return new CommentServiceImpl();
+	}
 }

@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function gomain() { location.href="notice"};
+	function goNoticeOneForm() { location.href="findOneNoticeForm?num=${noticeCommand.num}"}
 </script>
 	<link rel="stylesheet" type="text/css" href="/fake_resources/css/default/normalize.css"/>
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/default/default.css"/>
@@ -32,7 +33,6 @@ const remove = (obj) => {
     cnt--;
 }
 </script>
-  
 </head>
 
 <body>
@@ -44,52 +44,34 @@ const remove = (obj) => {
     </div>
 <form:form method="post" modelAttribute="noticeCommand" enctype="multipart/form-data">
     <div id="notice">
-    <c:forEach var="update" items="${noticeUpdate}">
       <div id="notice_detail">
-        <div class="container">
-          <div class="detail_wrapper d-flex">
-            <div class="side_block">
-              <div class="notice_info">
-                <div class="input_box_left">
-                  <h2>제목</h2>
-				  <form:input path="title" class="title" type="text" size="70" maxlength="100" value="${update.title}"/>
-                  <!-- <input type="hidden" value="${noticeCommand.writer}"> -->
-                </div>
-              </div>
+        <div class="container notice">
+   		<c:forEach var="update" items="${noticeUpdate}">
+          <div class="detail_wrapper notice d-flex">
+            <div class="content_block">
+              <div class="headline">
+   				<h3>MODIFY</h3>
+  			  </div>
+ 			  <div class="review">
+              <p class="sub_txt title">제목</p>
+              <form:input path="title" class="title" type="text" size="100" maxlength="100" value="${update.title}" />
+             	 <input type="hidden" value="${update.writer}">
+              <p class="sub_txt inner">내용</p>
+              <textarea id="content" class="content" name="content" cols="100" rows="100">${update.content}</textarea>
+           	  </div>
             </div>
-            <div class="side_block">
-              <div class="notice_info">
-                <div class="input_box_left">
-                  <h2>내용</h2>
-				  <textarea id="content" name="content" cols="72" rows="20">${update.content}</textarea>
-                </div>
-              </div>
-            </div>
-            <div class="side_block">
-              <div class="notice_info">
-	       		<h2>이미지</h2>
-	            <div id="box2">
-		       		<div class="upload_box">
-		      			 <input id="input-file" name="imgName2" type="file" placeholder="이미지등록" multiple/>
-		    		</div><br>
-	         		<input type="button" value="추가" onclick="add_textbox()">
-	     		</div>
-              </div>
           </div>
-          </div>
+      	  </c:forEach>
+          <div class="btn_group2">
+		      <button type="submit" class="btn2">수정</button> 
+			  <button type="button" onclick="goNoticeOneForm()" class="btn2">취소</button>
+		  </div>
         </div>
       </div>
-      </c:forEach>
-    <div class="btn_group2">
-      <button type="submit">수정</button> 
-	  <input type="reset" value="초기화">
-      <input type="button" onclick="gomain()" value="목록으로">
-    </div>
     </div>
     </form:form>
     </div>
     
     <script type="text/javascript" src="/fake_resources/js/ckeditor.js"></script>
-    
 </body>
 </html>

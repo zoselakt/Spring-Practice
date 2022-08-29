@@ -71,10 +71,8 @@
   bottom: 42px;
 }
 
-.button_wrap .btn_group{
+.button_wrap .btn_group {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 button {
@@ -100,6 +98,12 @@ button {
   background: none;
   margin-left: 20px;
   margin-top: 4px;
+}
+.button_wrap {
+  padding-left: 0px;
+}
+.button_wrap .btn_group {
+  float: left;
 }
 
 .button_wrap .btn_group .like img {

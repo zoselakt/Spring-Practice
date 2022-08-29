@@ -1,7 +1,13 @@
 @charset "UTF-8";
 
 .input_box_left input {
+  width: 200px;
   margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.input_box_left input:nth-child(1) {
+  margin-top: 55px;
 }
 
 .content_block .review .textarea_box {
@@ -10,7 +16,7 @@
 }
 
 .content_block .review .textarea_box {
-  width: 832px!important;
+  width: 828px!important;
   height: 300px;
   background-color: #f5f5f5;
 }
@@ -23,7 +29,6 @@
   align-items: center;
   background: #f5f5f5;
   margin-top: 5px;
-  margin-bottom: 20px;
 }
 
 .content_block .review .upload_box input {
@@ -35,34 +40,58 @@
 }
 
 .info .info_block input {
-  width: 500px!important;
+  width: 400px!important;
 }
 
-.button_wrap .btn_group {
-  margin-top: 30px!important;
+.info .info_block.small input {
+  width: 120px!important;
 }
 
-.btn_group2 {
+.info .info_block.last {
+  margin-top: 20px;
+}
+
+.info .info_block.last input {
+  margin-left: 30px;
+  width: 570px!important;
+}
+
+.info .info_block.last .first {
+  width: 230px;
+}
+
+.artwork_info_wrap {
+  padding-top: 10px;
+}
+
+/* side(right) -> hidden */
+.side_block .a_list {
+  border: none!important;
+}
+
+/* side(left) */
+.input_box_left input:nth-child(1) {
+  margin-top: 0;
+}
+
+/* artwork_upload title */
+.content_block .review {
+  float: left;
+  margin-bottom: 60px;
+}
+.content_block .review input {
+  width: 820px;
   text-align: center;
-  padding-bottom: 200px;
 }
 
-.btn2 {
-  font-size: 15px;
-  color: white;
-  background-color: #333;
-  width: 140px;
-  height: 38px;
+.content_block .review.artist_modify .textarea_box {
+  width: 838px!important;
 }
 
-.btn2:hover {
-  background: tomato;
+.content_block .review.artist_modify input {
+  width: 828px;
 }
 
-.btn1:hover {
-  background: #333!important;
-}
-
-.product {
-  margin-bottom: 100px!important;
+.content_block .review.artist_modify textarea {
+  line-height: 25px;
 }

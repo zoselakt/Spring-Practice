@@ -20,7 +20,7 @@
   
   <jsp:include page="/WEB-INF/views/header/header_main.jsp"/>
 
-    <div class="headline_artworks">
+    <div class="headline">
       <h3>GALLERYS</h3>
       <nav id="sub-nav">
         <ul>
@@ -72,9 +72,7 @@
                   </div>
                 </div>
               </c:forEach>
-                </div>
-                
-                
+                </div>   
               <!-- ===================== 페이징 처리 부분 ========================== -->
               <div class="toolbox">
       <ul class="pagination">
@@ -107,15 +105,10 @@
          </c:choose>
       </ul>
    </div>
-   
-              
-              
               <!-- ===================== 페이징 처리 부분 ========================== -->
-              
-              
+           
             </div>
           </div>
-
         </div>
       </form>
     </div>

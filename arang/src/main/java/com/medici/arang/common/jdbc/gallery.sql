@@ -1,3 +1,5 @@
+!DROP TABLE Gallerist;
+
 CREATE TABLE Gallerist(
 	email		VARCHAR(30)		PRIMARY KEY,
 	passwd		VARCHAR(20)		NOT NULL,
@@ -32,18 +34,14 @@ CREATE TABLE Gallery(
 
 SELECT * FROM Gallery;
 
-alter table GalleryInfo add constraint GalleryInfo_galleryCode foreign key (galleryCode)
-references Gallery(code) on update cascade on delete cascade;
 
 DROP TABLE GalleryInfo;
-
 CREATE TABLE GalleryInfo(
 	galleryCode 	BIGINT			NOT NULL,
 	description		VARCHAR(1000)	NOT NULL,
 	infoImgPath		VARCHAR(300),
 	CONSTRAINT GalleryInfo_galleryCode
 		FOREIGN KEY (galleryCode) REFERENCES Gallery(code)
-		on update cascade on delete cascade
 );
 
 SELECT * FROM GalleryInfo;

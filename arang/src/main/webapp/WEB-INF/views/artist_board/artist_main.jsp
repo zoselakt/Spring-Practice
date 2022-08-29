@@ -14,7 +14,6 @@
   <link rel="stylesheet" type="text/css" href="/fake_resources/css/swiper/swiper.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
   <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
-  <script type="text/javascript" src="/fake_resources/js/slidebanner.js"></script>
   
 </head>
 
@@ -28,7 +27,6 @@
           <div class="sub_page_top">
             <h5 class="sub_title">Artist of the month</h5>
             <div class="row">
-            
             
             <c:forEach var="artistL" items="${artistList1}" begin="0" end="1">
             <div class="col_wrap"> 
@@ -45,7 +43,6 @@
                     </div>
                     <div class="second d-flex flex-row">
                       <div>${artistL.title}</div>
-                      <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
                     </div>
                   </div>
                 </div>
@@ -61,7 +58,6 @@
   				</c:forEach>
                 </div>
               	</div>
-              
               </div>
   			</c:forEach>
              
@@ -77,12 +73,15 @@
                 <div class="col artist_item ${artworkPage.genre}">
                   <div class="artist_info d-flex flex-row">
                     <div class="artist_avatar">
-                      <a href="/arang/artist_board/artist_depth?id=${artworkPage.aid}"><img src="${artworkPage.imgPath}"></a>
+                      <a href="/arang/artist_board/artist_depth?id=${artworkPage.aid}">
+                      <img src="${artworkPage.imgPath}"></a>
                     </div>
                     <div class="artist_text">
                       <div class="first">
                         <span>${artworkPage.name_kor}</span>
-                        <span class="genre_tag">${artworkPage.genre}</span>
+                        <c:forTokens var="genre" items="${artworkPage.genre}" delims=";">
+                        <span class="genre_tag">${genre}</span>
+                        </c:forTokens>
                       </div>
                       <div class="second d-flex flex-row">
                         <div>날 것 그대로의 본질에 우연적 효과를 불어넣다.</div>

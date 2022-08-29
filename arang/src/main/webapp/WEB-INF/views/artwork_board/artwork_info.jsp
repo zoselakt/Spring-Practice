@@ -13,12 +13,11 @@
 <link rel="stylesheet" type="text/css" href="/fake_resources/css/swiper/swiper.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
 <script type="text/javascript" src="/fake_resources/js/jquery.js"></script>
-<script type="text/javascript" src="/fake_resources/js/slidebanner.js"></script>
+<script type="text/javascript" src="/fake_resources/js/common.js"></script>
 </head>
 <body>
 <div id="wrap">
 <jsp:include page="/WEB-INF/views/header/header.jsp"/>
-
 	<!-- 아트워크 상세 -->
     <div id="artwork">
       <div id="artwork_detail">
@@ -28,7 +27,7 @@
               <div class="artwork_view">
                 <div class="img_wrapper">
                   <div class="paintings">
-                    <img class="artwork" src="${artworkInfo.artworkImgPath}" alt="오브제1">
+                    <img class="artwork" src="${artworkInfo.artworkImgPath}" onload="JavaScript:artwork_large(this)">
                   </div>
                 </div>
               </div>
@@ -68,9 +67,18 @@
                 </div>
                 <div class="button_wrap">
                   <div class="btn_group">
-                    <a href="#"><button class="btn1">Contacting</button></a>
-                    <button class="like"><img src="../resources/img/icon/like.png" alt="like"></button>
-                    <p>76</p>
+                    <form action="testbtn" method="get">
+                      <input type="hidden" id="aid" name="artistId" value="${artistInfo.aid}" />
+                      <button id="contactBtn" class="btn1" type="submit">Contacting</button>
+                    </form>
+                      <button class="like likeButton" value="${wid}">
+                      <c:if test="${likeNum == 0}">
+                      <img class="like_img" src="/fake_resources/img/icon/like_2.png" alt="like">
+						</c:if>
+						<c:if test="${likeNum == 1}">
+                      <img class="like_img" src="/fake_resources/img/icon/like.png" alt="like">
+						</c:if>
+                      </button>
                   </div>
                 </div>
               </div>
@@ -104,8 +112,8 @@
                     <c:forEach var="artwork" items="${artworkList}">
                       <div class="item swiper-slide">
                         <div class="artwork_wrap">
-                          <a href="/arang/artwork_board/artwork_info?id=${artwork.wid}">
-                            <img class="artwork" src="${artwork.artworkImgPath}"></a>
+                          <a href="/arang/artwork_board/artwork_info?id=${artwork.artistId}&wid=${artwork.wid}">
+                            <img class="artwork" src="${artwork.artworkImgPath}" onload="JavaScript:artwork_middle(this)"></a>
                         </div>
                       <figcaption>
                           <h5>${artwork.name}</h5>
@@ -145,6 +153,52 @@
           prevEl: ".swiper-button-prev",
         },
       });
+      
+      
+      
+      $("#contactBtn").click(function() {
+		var aid = $("#aid").val();
+		var wid = $("#wid").val();
+		console.log(aid);
+		console.log(wid);
+	})
+     
+	$(".likeButton").click(function() {
+		//해당 Value값 가져와서 할당
+		let userId = '<c:out value="${email}"/>';
+		let targetValue = $(this).attr('value');
+		console.log(userId);
+		console.log(targetValue);
+		$.ajax({
+			type :'post',
+			url : '<c:url value ="/likeUp"/>',
+			contentType: 'application/json',
+			data : JSON.stringify(
+					{
+						"userId" : userId,
+						"targetValue" : targetValue,
+						"likeNum" : 1
+					}
+				),
+			context: this, 
+			success : function(data) {
+				alert(data.msg);
+				let likeCheck = data.likeCheck;
+				if(likeCheck == 1){
+					$(this).children("img").attr('src','../resources/img/icon/like_2.png');
+					console.log($(this));
+				}else{
+					$(this).children("img").attr('src','../resources/img/icon/like.png');
+					console.log($(this));
+				}
+			},
+			error : function(error) {
+				alert(error);
+			}
+		})
+
+	});//like
+      
     </script>
 </body>
 </html>
