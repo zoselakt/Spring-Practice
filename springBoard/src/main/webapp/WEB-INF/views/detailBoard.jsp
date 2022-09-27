@@ -7,9 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+</style>
 </head>
 <body>
 <form:form method="post">
+	<h1>Mybatis Board</h1>
 	<table>
 		<tr>
 			<td>No.</td>
