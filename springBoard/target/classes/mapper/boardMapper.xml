@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.bluebiz.board.mapper.boardMapper">
+	<insert id="insert" parameterType="boardDto">
+		INSERT INTO board (bnum, title, writer, content)
+		VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{writer}, #{content})
+	</insert>
+	
+	<update id="update" parameterType="boardDto">
+		UPDATE board SET bnum = #{bnum}, title = #{title}, writer = #{writer}, 
+		content = #{content} WHERE bnum = #{bnum}
+	</update>
+	
+	<delete id="delete" parameterType="boardDto">
+		DELETE FROM board WHERE bnum = #{bnum}
+	</delete>
+	
+	
+	<select id="selectAll" resultType="boardDto">
+		SELECT * FROM board
+	</select>
+	
+	<select id="selectOne" resultType="boardDto" parameterType="int">
+		SELECT * FROM board WHERE bnum = #{bnum}
+		<where>
+		
+		</where>
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT count(*) FROM board
+	</select>
+	
+	<update id="readCnt" parameterType="int">
+		update board set readCnt = readCnt + 1 
+		where bnum = #{bnum}
+	</update>
+	
+</mapper>
