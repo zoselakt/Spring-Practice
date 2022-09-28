@@ -30,7 +30,7 @@ h1{
 </style>
 </head>
 <body>
-	<form:form action="insertBoard" method="post" modelAttribute="boardDto">
+	<form:form action="insertBoard" method="post" modelAttribute="boardDto" onsubmit="insertAlert()">
 		<h1>Board Insert </h1>
 		<table class="insert-table">
 			<tr>
