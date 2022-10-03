@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> let together </title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <header id="header">
+        <h1>Let's chat together</h1>
+    </header>
+    <div class="chatting-wrap">
+        <div class="chatting">
+            <div class="title">Chris</div>
+            <!-- 채팅화면영역 -->
+            <div class="chat-box">
+                <div class="line char-b">
+                    <div class="txt">안녕하세요</div>
+                </div>
+                <div class="line  char-a right">
+                    <div class="txt">안녕하세요</div>
+                </div>
+            </div>
+            <!-- 채팅입력창 -->
+            <div class="input-box">
+                <input type="text" class="user-a" onkeypress="inputChat(this)"><!--onkeypress 이벤트 처리추가영역-->
+                <!-- <button class="user-a" onclick="chattingFunc(this)">보내기</button> // onclick 이벤트 영역 -->
+                <button class="user-a" onclick="sendTxt(this)">보내기</button>
+            </div>
+        </div>
+<!-- -------------------------------------------------------------------------- -->
+        <div class="chatting">
+            <div class="title">Jane</div>
+            <!-- 채팅화면영역 -->
+            <div class="chat-box">
+                <div class="line char-b">
+                    <div class="txt">안녕하세요</div>
+                </div>
+                <div class="line  char-a right">
+                    <div class="txt">안녕하세요</div>
+                </div>
+            </div>
+            <!-- 채팅입력창 -->
+            <div class="input-box">
+                <!-- class="" 안에 내용은 jquery, javascript등 db와 연결(쌍방향통신)할 수 있는 
+                    IDE 에서 데이터 값을 불러와 기입 / 현재는 연습으로 user-a/ -b 등으로 처리 -->
+                <input type="text" class="user-b" onkeypress="inputChat(this)"><!--onkeypress 이벤트 처리추가영역-->
+                <!-- <button class="user-a" onclick="chattingFunc(this)">보내기</button> // onclick 이벤트 영역 -->
+                <button class="user-b" onclick="sendTxt(this)">보내기</button>
+            </div>
+        </div>
+<!-- -------------------------------------------------------------------------- -->
+        <div class="chatting">
+            <div class="title">Tom</div>
+            <!-- 채팅화면영역 -->
+            <div class="chat-box">
+                <div class="line char-b">
+                    <div class="txt">안녕하세요</div>
+                </div>
+                <div class="line  char-a right">
+                    <div class="txt">안녕하세요</div>
+                </div>
+            </div>
+            <!-- 채팅입력창 -->
+            <div class="input-box">
+                <input type="text" class="user-c" onkeypress="inputChat(this)"><!--onkeypress 이벤트 처리추가영역-->
+                <!-- <button class="user-a" onclick="chattingFunc(this)">보내기</button> // onclick 이벤트 영역 -->
+                <button class="user-c" onclick="sendTxt(this)">보내기</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script type="text/javascript" src="./js/common.js"></script>
+</body>
+</html>

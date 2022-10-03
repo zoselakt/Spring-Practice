@@ -1,0 +1,18 @@
+@charset "UTF-8";
+*{margin: 0; padding: 0;}
+html, body{height: 100%;}
+
+.Squere_box{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: burlywood;
+}
+
+.circle_box{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: rgb(245, 110, 110);
+    border-radius: 50px;
+}

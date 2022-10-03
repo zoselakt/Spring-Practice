@@ -1,0 +1,133 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Rock+3D&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Rock+3D&display=swap');
+*{margin: 0; padding: 0;}
+html, body{height: 100%; font-family: 'Anton', sans-serif;}
+li{list-style: none;}
+button{border: 0; background: none;}
+button, input{outline: none;}
+
+/* 헤더 */
+#header{ text-align: center; }
+#header h1{
+    height: 100px;
+    line-height: 100px;
+    font-size: 50px;
+    color: #fa6c14;
+}
+
+/* 채팅 */
+.chatting-wrap{
+    display: flex;
+    justify-content: space-around;
+}
+.chatting{
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 143, 0, 1);
+}
+/* 채팅타이틀 */
+.chatting .title{
+    position: absolute;
+    height: 50px;
+    line-height: 50px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 143, 0, 1);
+    padding: 0 5px;
+    color: #fff;   
+    z-index: 10;
+}
+/* 채팅바디 */
+.chatting .chat-box{
+    height: 500px;
+    padding: 60px 10px 0;
+    margin-right: -16px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    font-family: "Noto Sans KR", sans-serif;
+    scroll-behavior: smooth;
+}
+/* chatline */
+.chatting .chat-box .line{
+    position: relative;
+    padding-left: 30px;
+    line-height: 25px;
+    max-width: calc(100% - 30px);
+    /* background: red; */
+}
+.chatting .chat-box .line + .line{ margin-top: 20px; }
+.chatting .chat-box .line::before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: #f1f1f1;
+    background-size: cover;
+}
+/*채팅이미지*/
+.chatting .chat-box .line.char-a::before{
+    background-image: url("../img/img_01.jpg");
+}
+.chatting .chat-box .line.char-b::before{
+    background-image: url("../img/img_02.jpg");
+}
+.chatting .chat-box .line.char-c::before{
+    background-image: url("../img/img_03.jpg");
+}
+/* 채팅2 오른쪽배치 */
+.chatting .chat-box .line.right{
+    padding: 0 30px 0 0;
+    text-align: right;
+}
+.chatting .chat-box .line.right::before{
+    left: auto;
+    right: 0;
+}
+/* 채팅 텍스트출력 */
+.chatting .chat-box .line .txt{
+    background: #f1f1f1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 0 5px;
+    display: inline-block;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    word-break: break-all;
+}
+.chatting .chat-box .line.right .txt{
+    background: rgb(255,100,0);
+    background: linear-gradient(90deg, rgba(255,100,0,1) 0%, rgba(255, 143, 0 ,1) 100%);
+}
+/* 채팅입력부분 */
+.input-box{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 143, 0, 1);
+}
+
+.input-box input, .input-box button{
+    height: 30px;
+    line-height: 30px;
+}
+.input-box input{
+    flex-grow: 1;
+    border: none;
+    padding: 0 5px;
+}
+.input-box button{
+    padding: 0 10px;
+    background: rgba(255, 143, 0, 1);
+    color: #fff;
+    font-weight: bold;
+}

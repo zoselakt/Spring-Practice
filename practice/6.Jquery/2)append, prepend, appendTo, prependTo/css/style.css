@@ -1,0 +1,17 @@
+@charset "UTF-8";
+*{margin: 0; padding: 0;}
+html, body{height: 100%;}
+ul, ol{list-style: none;}
+body{background: cadetblue;}
+a{color: #666;}
+
+ul li a{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    height: 32px;
+    text-transform: uppercase;
+    color: black;
+}
+ul li a > *{ float: left; }
+ul li a img{ height: 20px; margin-right: 5px; }

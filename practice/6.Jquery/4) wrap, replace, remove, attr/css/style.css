@@ -1,0 +1,21 @@
+@charset "UTF-8";
+*{margin: 0; padding: 0;}
+html, body{height: 100%;}
+a{color: #666;}
+body{ transition: 5s; background: cadetblue;}
+body.bg_red{background-color: red;}
+body.bg_blue{background-color: blue;}
+body.bg_yellow{background-color: yellow;}
+body.bg_black{background-color: black;}
+p{ color: red; }
+
+#wrap-id{
+    position: absolute;
+    display: inline-block;
+    top: -500px;
+    transition: 5s;
+}
+
+body.bg-yellow #wrap-id{
+    top: 0;
+}

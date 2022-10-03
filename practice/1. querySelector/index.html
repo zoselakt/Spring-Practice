@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0};
+        li{list-style: none;}
+    </style>
+</head>
+<body>
+    <p class="txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, dolores. Suscipit exercitationem reiciendis perferendis voluptatem dolores beatae cum, aliquid possimus explicabo consequatur similique qui ex fugiat iure, quas mollitia ad?</p>
+    <div class="nav">
+        <ul>
+            <li><a href="#" class="txt"></a></li>
+        </ul>
+    </div>
+
+    <button onclick="textColorChange()">textColorChange</button>
+    <br><br>
+
+    <div class="txt-content">
+        <div class="content">
+            <h2><p>title</p></h2>
+            <p>subtitle</p>
+            <input id="input-text" type="text" name="input-text">
+        </div>
+    </div>
+
+    <button onclick="innerTxt()">innerHTML</button>
+    <br><br>
+
+    <div class="content-wrap">
+        <table class="content-table">
+            <tr>
+                <td>border연습</td>
+            </tr>
+        </table>
+    </div>
+
+    <button onclick="borderAdd()">border생성</button>
+    <button onclick="borderChange()">border변경</button>
+    <button onclick="borderDel()">border삭제</button>
+
+    <script type="text/javascript" src="./js/common.js"></script>
+</body>
+</html>
